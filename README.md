@@ -3,12 +3,16 @@
 <h3 align="center">Licenciatura em Engenharia Informática <br> Trabalho prático de Desenvolvimento de Sistemas de Software <br> 2022/2023 </h3>
 
 ---
+<h3 align="center"> Colaboradores &#129309 </h2>
 
-<p align="center">
-Ana Rita Poças, A97284 <br>
-João Pedro Braga, A97368 <br> 
-Miguel Pinto, A96106 <br> 
-Orlando Palmeira, A97755 <br> 
-Pedro Martins, A97613
-    <br> 
-</p>
+<div align="center">
+
+| Nome             | Número |
+|------------------|--------|
+| Ana Rita Poças   | A97284 |
+| João Pedro Braga | A97368 |
+| Miguel Pinto     | A96106 |
+| Orlando Palmeira | A97755 |
+| Pedro Martins    | A97613 |
+
+</div>
