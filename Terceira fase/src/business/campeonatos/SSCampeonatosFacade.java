@@ -3,6 +3,7 @@ package business.campeonatos;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import business.carros.Carro;
 import data.PilotosDAO;
@@ -38,27 +39,26 @@ public class SSCampeonatosFacade implements ISSCampeonados{
     }
 
     @Override
-    public void adicionaCircuito(String name, int numVoltas, List<Setor> setores) {
-        // TODO Auto-generated method stub
-        
+    public void adicionaCircuito(String name, int numVoltas, List<Setor> setores, int comprimento) {
+        boolean clima = new Random().nextInt(1) == 0;
+        Circuito c = new Circuito(name,numVoltas,clima,comprimento);
+        this.circuitos.put(name, c);
     }
 
     @Override
     public boolean campeonatoValido(String name) {
-        // TODO Auto-generated method stub
-        return false;
+        return !this.campeonatos.containsKey(name);
     }
 
     @Override
     public void adicionaCampeonato(String name, Collection<Circuito> circuitos) {
-        // TODO Auto-generated method stub
-        
+        Campeonato c = new Campeonato(name, circuitos);
+        this.campeonatos.put(name,c);
     }
 
     @Override
     public void addJogador(String username, Piloto piloto, Carro carro) {
-        // TODO Auto-generated method stub
-        
+        // TODO: !!!!!!!!!!ESTE MÉTODO TEM PROBLEMAS!!!!!!!!!!1
     }
     
 }

@@ -13,7 +13,7 @@ public interface ISSCampeonados {
 
     public boolean validarCircuito(String name);
 
-    public void adicionaCircuito(String name, int numVoltas, List<Setor> setores);
+    public void adicionaCircuito(String name, int numVoltas, List<Setor> setores, int comprimento);
 
     public boolean campeonatoValido(String name);
 
