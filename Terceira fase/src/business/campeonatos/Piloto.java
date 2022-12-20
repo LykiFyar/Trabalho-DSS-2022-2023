@@ -1,7 +1,5 @@
 package business.campeonatos;
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
-
 import java.util.Random;
 
 public class Piloto {

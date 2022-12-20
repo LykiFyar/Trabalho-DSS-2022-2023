@@ -34,7 +34,7 @@ public class Circuito {
 
     private String printJogadores(List<Jogador> jogadores, int volta){
         StringBuilder sb = new StringBuilder();
-        sb.append("\n||||| Poisições na volta "); sb.append(volta); sb.append(" |||||\n");
+        sb.append("\n||||| Posições na volta ").append(volta).append(" |||||\n");
 
         int i=1;
         for (Jogador j:jogadores){
