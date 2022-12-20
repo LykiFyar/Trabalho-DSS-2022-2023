@@ -32,6 +32,34 @@ public class Circuito {
         this.dnf = new HashMap<Jogador,Integer>();
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public int getNumVoltas() {
+        return numVoltas;
+    }
+
+    public boolean isClima() {
+        return clima;
+    }
+
+    public int getComprimento() {
+        return comprimento;
+    }
+
+    public List<Setor> getSetores() {
+        return setores;
+    }
+
+    public List<Jogador> getParticipantes() {
+        return participantes;
+    }
+
+    public Map<Jogador, Integer> getDnf() {
+        return dnf;
+    }
+
     private String printJogadores(List<Jogador> jogadores, int volta){
         StringBuilder sb = new StringBuilder();
         sb.append("\n||||| Posições na volta ").append(volta).append(" |||||\n");

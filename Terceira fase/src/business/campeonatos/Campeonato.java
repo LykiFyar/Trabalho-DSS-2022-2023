@@ -42,9 +42,10 @@ public class Campeonato {
     public void SimularCampeonato(){
         int i = 1;
         for(Circuito c: circuitos){
-            System.out.println("||||| Corrida: " + i + " |||||");
+            System.out.println("||||| Corrida: " + c.getNome() + " |||||");
             c.SimularCorrida(jogadores);
             i++;
+
         }
     }
 
