@@ -1,9 +1,9 @@
 package business.carros;
 
 public class MotorICE {
-    private int cilindrada;
-    private int potencia;
-    private int funcionamentoMotor;
+    private int cilindrada; // este valor parece influenciar apenas a fiabilidade do motor e não a sua performance
+    private int potencia; // este valor influencia diretamente a performance do carro
+    private int funcionamentoMotor; // 0-conservador, 1-normal, 2-agressivo. influencia DNFs e velocidade
 
     private MotorICE(){}
 

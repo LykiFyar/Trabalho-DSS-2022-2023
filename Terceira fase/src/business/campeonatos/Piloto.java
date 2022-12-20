@@ -1,9 +1,13 @@
 package business.campeonatos;
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+
+import java.util.Random;
+
 public class Piloto {
     private String nome;
-    private float cts;
-    private float sva;
+    private float cts; // perto de 0 é melhor em chuva e perto de 1 melhor em tempo seco
+    private float sva; // perto de 0 o piloto conduz de forma mais segura e perto de 1 ultrapassa mais facilmente
 
     private Piloto(){}
 
@@ -62,6 +66,24 @@ public class Piloto {
     public int hashCode(){
         Float c = cts, s = sva;
         return nome.hashCode() + c.hashCode() + s.hashCode(); 
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Piloto - ").append(this.nome);
+        /*
+        sb.append("CTS:").append(this.cts).append("\n");
+        sb.append("SVA:").append(this.sva).append("\n");
+         */
+        return sb.toString();
+    }
+
+    // função que verifica se um piloto sai da pista ou não
+    public boolean dnf(){
+        Random rand = new Random();
+        int random = rand.nextInt(100);
+        return this.sva * (float) random > 65;
     }
 
 }

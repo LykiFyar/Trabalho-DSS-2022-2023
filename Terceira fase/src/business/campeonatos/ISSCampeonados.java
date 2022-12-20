@@ -21,4 +21,6 @@ public interface ISSCampeonados {
 
     public void addJogador(String username, Piloto piloto, Carro carro);
 
+    public void jogarCampeonato(String name);
+
 }

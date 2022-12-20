@@ -55,6 +55,8 @@ public abstract class Classe {
         this.fiabilidade = fiabilidade;
     }
 
+    public abstract int getPotenciaMotorEletrico();
+
     @Override
     public int hashCode() {
         Integer minC = minCilindrada, maxC = maxCilindrada, fia = fiabilidade;

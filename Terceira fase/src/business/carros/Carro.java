@@ -1,10 +1,15 @@
 package business.carros;
 
+import business.campeonatos.Circuito;
+import business.campeonatos.Piloto;
+
+import java.util.Map;
+
 public class Carro {
     private String marca;
     private String modelo;
-    private int pneu;
-    private float pac;
+    private int pneu; // 0-Macio, 1-duro, 2-chuva
+    private float pac; // float entre 0 e 1 (perto de 0 é melhor nas retas e 1 é melhor nas curvas)
     private MotorICE motorICE;
     private Classe classe;
 
@@ -130,4 +135,16 @@ public class Carro {
         return new Carro(marca, modelo, pneu, pac, motorICE, classe);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Carro - ").append(this.marca).append("-").append(this.modelo);
+        /*
+        sb.append("Pneu:").append(this.pneu).append("\n");
+        sb.append("Pac:").append(this.pac).append("\n");
+        sb.append("MotorICE:").append(this.motorICE.toString()).append("\n");
+        sb.append("Classe:").append(this.classe.toString());
+         */
+        return sb.toString();
+    }
 }

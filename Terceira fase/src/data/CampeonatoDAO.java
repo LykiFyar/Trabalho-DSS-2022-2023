@@ -1,5 +1,9 @@
 package data;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -10,7 +14,18 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
 
     private static CampeonatoDAO singleton = null;
 
-    private CampeonatoDAO() {}
+    private CampeonatoDAO() {
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             Statement stm = conn.createStatement()) {
+            String sql = "CREATE TABLE IF NOT EXISTS campeonato (" +
+                    "Nome varchar(45) NOT NULL PRIMARY KEY,";
+            stm.executeUpdate(sql);
+        } catch (SQLException e) {
+            // Erro a criar tabela...
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
 
     public static CampeonatoDAO getInstance(){
         if(CampeonatoDAO.singleton == null){

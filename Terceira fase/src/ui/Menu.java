@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Menu{
-    
+
     public interface Handler{
         void execute();
     }
@@ -37,6 +37,10 @@ public class Menu{
 
     public Menu(String titulo, String[] opcoes){
         this(titulo,Arrays.asList(opcoes));
+    }
+
+    public Menu(String[] opcoes){
+        this("Menu",Arrays.asList(opcoes));
     }
 
     /**

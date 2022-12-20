@@ -40,8 +40,8 @@ public class SSCampeonatosFacade implements ISSCampeonados{
 
     @Override
     public void adicionaCircuito(String name, int numVoltas, List<Setor> setores, int comprimento) {
-        boolean clima = new Random().nextInt(1) == 0;
-        Circuito c = new Circuito(name,numVoltas,clima,comprimento);
+        boolean clima = new Random().nextInt(2) == 0;
+        Circuito c = new Circuito(name,numVoltas,clima,comprimento,null);
         this.circuitos.put(name, c);
     }
 
@@ -60,5 +60,10 @@ public class SSCampeonatosFacade implements ISSCampeonados{
     public void addJogador(String username, Piloto piloto, Carro carro) {
         // TODO: !!!!!!!!!!ESTE MÉTODO TEM PROBLEMAS!!!!!!!!!!1
     }
-    
+
+    @Override
+    public void jogarCampeonato(String name) {
+        Campeonato campeonato = campeonatos.get(name);
+
+    }
 }

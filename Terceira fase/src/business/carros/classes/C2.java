@@ -31,4 +31,8 @@ public class C2 extends Classe {
         return super.hashCode();
     }
 
+    public int getPotenciaMotorEletrico() {
+        return 0;
+    }
+
 }

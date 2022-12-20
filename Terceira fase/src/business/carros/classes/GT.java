@@ -39,5 +39,9 @@ public class GT extends Classe {
         Float td = taxaDeterioracao;
         return super.hashCode() + td.hashCode();
     }
-    
+
+    public int getPotenciaMotorEletrico() {
+        return 0;
+    }
+
 }

@@ -31,4 +31,8 @@ public class SC extends Classe {
         return super.hashCode();
     }
 
+    public int getPotenciaMotorEletrico() {
+        return 0;
+    }
+
 }
