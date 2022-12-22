@@ -62,7 +62,7 @@ public class Circuito {
 
     private String printJogadores(List<Jogador> jogadores, int volta){
         StringBuilder sb = new StringBuilder();
-        sb.append("\n||||| Posições na volta ").append(volta).append(" |||||\n");
+        sb.append("||||| Posições na volta ").append(volta).append(" |||||\n");
 
         int i=1;
         for (Jogador j:jogadores){
@@ -73,14 +73,15 @@ public class Circuito {
         return sb.toString();
     }
 
-    public void SimularCorrida(List<Jogador> jogadores){
-        for(int i=0; i<numVoltas; i++){
+    public String SimularCorrida(List<Jogador> jogadores){
+        StringBuilder result = new StringBuilder();
+        for(int i=1; i<=numVoltas; i++){
             for (Setor s: setores){
                 s.SimularSetor(jogadores, this.clima);
             }
-            String js = printJogadores(jogadores,i);
-            System.out.println(js);
+            result.append(printJogadores(jogadores,i));
         }
+        return result.toString();
     }
 
     // TODO: Completar esta classe

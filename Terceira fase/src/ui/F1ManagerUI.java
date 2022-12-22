@@ -1,16 +1,16 @@
 package ui;
 
-import business.campeonatos.Campeonato;
 import business.campeonatos.ISSCampeonados;
+import business.campeonatos.SSCampeonatosFacade;
 import business.carros.ISSCarros;
+import business.carros.SSCarrosFacade;
 import business.utilizadores.ISSUtilizadores;
+import business.utilizadores.SSUtilizadoresFacade;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class F1ManagerUI{
-    private ISSCampeonados campeonados;
+    private ISSCampeonados campeonatos;
 
     private ISSCarros carros;
 
@@ -30,6 +30,9 @@ public class F1ManagerUI{
 
         this.menu.setHandler(1,this::jogarCampeonato);
 
+        this.campeonatos = new SSCampeonatosFacade();
+        this.carros = new SSCarrosFacade();
+        this.utilizadores = new SSUtilizadoresFacade();
         scin = new Scanner(System.in);
     }
 
@@ -41,10 +44,22 @@ public class F1ManagerUI{
 
     private void jogarCampeonato() {
         try{
-            Campeonato c = new Campeonato();
-            c.SimularCampeonato();
+            System.out.println("Qual campeonato pretente jogar?");
+            System.out.println(this.campeonatos.printCampeonatos());
+            String camp = scin.nextLine();
+            try{
+                for (int i=0; i<this.campeonatos.numCorridas(camp); i++){
+                    System.out.println("||||| Corrida " + (i+1) + " |||||\n");
+                    System.out.println(this.campeonatos.jogarCampeonato(camp,i));
+                    System.out.println("Prime enter para simular a próxima corrida!");
+                    scin.nextLine();
+                }
+            }
+            catch (NullPointerException e){
+                System.out.println("O campeonato inserido não existe");
+            }
         }
-        catch (NullPointerException e) {
+        catch (NullPointerException e){
             System.out.println(e.getMessage());
         }
     }

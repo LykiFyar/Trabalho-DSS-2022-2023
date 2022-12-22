@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Campeonato {
     private String nome;
-    private Collection<Circuito> circuitos;
+    private List<Circuito> circuitos;
     private List<Jogador> jogadores;
     private Map<String,Integer> classificacao; // classificação para jogadores de carros normais.
     private Map<String,Integer> classificacaoH; // classificação para jogadores de carros híbridos.
@@ -21,17 +21,17 @@ public class Campeonato {
         List<Jogador> jogadores= new ArrayList<>();
         jogadores.add(j1); jogadores.add(j2);
         this.jogadores = jogadores;
-        Circuito c1 = new Circuito("c1",3,true,10, this.jogadores);
-        Circuito c2 = new Circuito("c2",3,true,20, this.jogadores);
-        Circuito c3 = new Circuito("c3",3,false,30, this.jogadores);
-        Collection<Circuito> circuitos = new ArrayList<>();
+        Circuito c1 = new Circuito("C1",3,true,10, this.jogadores);
+        Circuito c2 = new Circuito("C2",3,true,20, this.jogadores);
+        Circuito c3 = new Circuito("C3",3,false,30, this.jogadores);
+        List<Circuito> circuitos = new ArrayList<>();
         circuitos.add(c1); circuitos.add(c2); circuitos.add(c3);
         this.circuitos = circuitos;
         this.classificacao = new HashMap<String,Integer>();
         this.classificacaoH = new HashMap<String,Integer>();
     }
 
-    public Campeonato(String name, Collection<Circuito> circuitos){
+    public Campeonato(String name, List<Circuito> circuitos){
         this.nome = name;
         this.circuitos = circuitos; // PODE TER QUE SER ALTERADO
         this.jogadores = new ArrayList<Jogador>(); // PODE TER QUE SER ALTERADO
@@ -39,14 +39,18 @@ public class Campeonato {
         this.classificacaoH = new HashMap<String,Integer>();
     }
 
-    public void SimularCampeonato(){
-        int i = 1;
-        for(Circuito c: circuitos){
-            System.out.println("||||| Corrida: " + c.getNome() + " |||||");
-            c.SimularCorrida(jogadores);
-            i++;
+    public int numCorridas(){
+        return this.circuitos.size();
+    }
 
-        }
+    public String SimularCampeonato(int corrida){
+        Circuito c = this.circuitos.get(corrida);
+        return c.SimularCorrida(jogadores);
+    }
+
+    @Override
+    public String toString() {
+        return this.nome;
     }
 
     // TODO: Completar esta classe
