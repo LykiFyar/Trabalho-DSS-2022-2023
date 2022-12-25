@@ -56,11 +56,12 @@ public class Setor {
      * Função que simula as ultrapassagens nos setores
      * @param jogadores Lista dos jogadores ativos na corrida
      * @param clima True-chuva | False-seco
+     * @param halfDistance Indica se a simulação está a decorrer na primeira ou na segunda metade da corrida
      */
-    public void SimularSetor(List<Jogador> jogadores, boolean clima){
+    public void SimularSetor(List<Jogador> jogadores, boolean clima, boolean halfDistance){
         List<Float> tempos = new ArrayList<>();
         for (Jogador j:jogadores){
-            float tempo = j.calcularTempo(tipoSetor,clima);
+            float tempo = j.calcularTempo(tipoSetor,clima, halfDistance);
             tempos.add(tempo);
         }
         // dependendo da dificuldade de ultrapassagem e dos tempos dos carros decidir se existe ultrapassagem ou não.

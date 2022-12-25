@@ -108,6 +108,8 @@ public class Carro {
         this.classe = classe.clone();
     }
 
+    public void setFuncMotor(int m) {this.motorICE.setFuncionamentoMotor(m);}
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -135,16 +137,23 @@ public class Carro {
         return new Carro(marca, modelo, pneu, pac, motorICE, classe);
     }
 
+    private String getPneuS(){
+        if (this.pneu == 0){
+            return "Macio";
+        } else if (this.pneu == 1) {
+            return "Duro";
+        }
+        else return "Chuva";
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Carro - ").append(this.marca).append("-").append(this.modelo);
-        /*
-        sb.append("Pneu:").append(this.pneu).append("\n");
-        sb.append("Pac:").append(this.pac).append("\n");
-        sb.append("MotorICE:").append(this.motorICE.toString()).append("\n");
-        sb.append("Classe:").append(this.classe.toString());
-         */
+        sb.append("\nPneu:").append(this.getPneuS());
+        sb.append("\nPac:").append(this.pac);
+        sb.append("\nMotorICE:").append(this.motorICE.toString());
+        sb.append("\nClasse:").append(this.classe.toString());
         return sb.toString();
     }
 }

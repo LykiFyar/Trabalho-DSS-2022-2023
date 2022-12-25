@@ -1,6 +1,7 @@
 package business.campeonatos;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import business.carros.Carro;
 import data.PilotosDAO;
@@ -84,12 +85,8 @@ public class SSCampeonatosFacade implements ISSCampeonados{
         // TODO: !!!!!!!!!!ESTE MÉTODO TEM PROBLEMAS!!!!!!!!!!1
     }
 
-    public String printCampeonatos(){
-        StringBuilder sb = new StringBuilder();
-        for (String c : this.campeonatos.keySet()){
-            sb.append(c);
-        }
-        return sb.toString();
+    public List<String> getCampeonatosNames(){
+        return new ArrayList<>(this.campeonatos.keySet());
     }
 
     @Override
@@ -101,4 +98,29 @@ public class SSCampeonatosFacade implements ISSCampeonados{
     public int numCorridas(String name){
         return this.campeonatos.get(name).numCorridas();
     }
+
+    public String printCorrida(String campeonato, int nCorrida){
+        return this.campeonatos.get(campeonato).printCorrida(nCorrida);
+    }
+
+    public int numJogadores(String name){
+        return this.campeonatos.get(name).numJogadores();
+    }
+
+    public String printJogador(String campeonato, int nJogador){
+        return this.campeonatos.get(campeonato).printJogador(nJogador);
+    }
+
+    public boolean alterarPneu(String campeonato, int nJogador, int pneu){
+        return this.campeonatos.get(campeonato).alterarPneu(nJogador, pneu);
+    }
+
+    public boolean alterarPac(String campeonato, int nJogador, float pac){
+        return this.campeonatos.get(campeonato).alterarPac(nJogador, pac);
+    }
+
+    public boolean alterarFuncMotor(String campeonato, int nJogador, int m){
+        return this.campeonatos.get(campeonato).alterarFuncMotor(nJogador, m);
+    }
+
 }

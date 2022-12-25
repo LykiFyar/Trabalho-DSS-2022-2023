@@ -35,4 +35,8 @@ public class SC extends Classe {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return "SC";
+    }
 }

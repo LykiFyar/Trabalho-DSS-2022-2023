@@ -46,5 +46,9 @@ public class C1H extends C1 implements Hibrido {
         Integer me = motorEletrico;
         return super.hashCode() + me.hashCode();
     }
-    
+
+    @Override
+    public String toString() {
+        return "C1H";
+    }
 }

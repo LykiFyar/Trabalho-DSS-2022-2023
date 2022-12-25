@@ -28,10 +28,22 @@ public interface ISSCampeonados {
 
     public void addJogador(String username, Piloto piloto, Carro carro);
 
-    public String printCampeonatos();
+    public List<String> getCampeonatosNames();
 
     public String jogarCampeonato(String name, int corrida);
 
     public int numCorridas(String name);
+
+    public String printCorrida(String campeonato, int nCorrida);
+
+    public int numJogadores(String name);
+
+    public String printJogador(String campeonato, int nJogador);
+
+    public boolean alterarPneu(String campeonato, int nJogador, int pneu);
+
+    public boolean alterarPac(String campeonato, int nJogador, float pac);
+
+    public boolean alterarFuncMotor(String campeonato, int nJogador, int m);
 
 }

@@ -45,5 +45,9 @@ public class C2H extends C2 implements Hibrido {
     public C2H clone(){
         return new C2H(super.getMinCilindrada(),super.getMaxCilindrada(),super.getFiabilidade(),this.motorEletrico);
     }
-    
+
+    @Override
+    public String toString() {
+        return "C2H";
+    }
 }

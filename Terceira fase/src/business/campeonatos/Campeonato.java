@@ -35,8 +35,14 @@ public class Campeonato {
         this.nome = name;
         this.circuitos = circuitos; // PODE TER QUE SER ALTERADO
         this.jogadores = new ArrayList<Jogador>(); // PODE TER QUE SER ALTERADO
-        this.classificacao = new HashMap<String,Integer>(); 
+        this.classificacao = new HashMap<String,Integer>();
         this.classificacaoH = new HashMap<String,Integer>();
+    }
+
+
+    @Override
+    public String toString() {
+        return this.nome;
     }
 
     public int numCorridas(){
@@ -48,9 +54,28 @@ public class Campeonato {
         return c.SimularCorrida(jogadores);
     }
 
-    @Override
-    public String toString() {
-        return this.nome;
+    public String printCorrida(int nCorrida){
+        return this.circuitos.get(nCorrida).toString();
+    }
+
+    public int numJogadores(){
+        return this.jogadores.size();
+    }
+
+    public String printJogador(int nJogador){
+        return this.jogadores.get(nJogador).toString();
+    }
+
+    public boolean alterarPneu(int nJogador, int pneu){
+        return this.jogadores.get(nJogador).alterarPneu(pneu);
+    }
+
+    public boolean alterarPac(int nJogador, float pac){
+        return this.jogadores.get(nJogador).alterarPac(pac);
+    }
+
+    public boolean alterarFuncMotor(int nJogador, int m){
+        return this.jogadores.get(nJogador).alterarFuncMotor(m);
     }
 
     // TODO: Completar esta classe

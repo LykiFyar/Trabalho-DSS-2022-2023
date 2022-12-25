@@ -46,5 +46,9 @@ public class GTH extends GT implements Hibrido {
     public GTH clone(){
         return new GTH(super.getMinCilindrada(),super.getMaxCilindrada(),super.getFiabilidade(),super.getTaxaDeterioracao(),this.motorEletrico);
     }
-    
+
+    @Override
+    public String toString() {
+        return "GTH";
+    }
 }

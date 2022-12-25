@@ -78,6 +78,23 @@ public class MotorICE {
                funcionamentoMotor == m.funcionamentoMotor;
     }
 
+    private String getFuncionamento(){
+        if (this.funcionamentoMotor == 0){
+            return "Conservador";
+        } else if (this.funcionamentoMotor == 1) {
+            return "Normal";
+        }
+        else return "Agressivo";
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" Cilindrada:").append(this.cilindrada);
+        sb.append(" | Potência:").append(this.potencia);
+        sb.append(" | Funcionamento:").append(this.getFuncionamento());
+        return sb.toString();
+    }
 
     public MotorICE clone(){
         return new MotorICE(cilindrada, potencia, funcionamentoMotor);

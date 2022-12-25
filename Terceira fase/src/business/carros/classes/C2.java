@@ -35,4 +35,8 @@ public class C2 extends Classe {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return "C2";
+    }
 }

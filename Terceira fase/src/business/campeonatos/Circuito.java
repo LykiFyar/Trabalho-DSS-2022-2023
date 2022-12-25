@@ -60,6 +60,16 @@ public class Circuito {
         return dnf;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("||||||||||||| Circuito: ").append(this.nome).append(" |||||||||||||\n");
+        sb.append("| Clima:").append(this.clima ? "Chuva" : "Seco");
+        sb.append(" | Voltas:").append(this.numVoltas);
+        sb.append(" | Comprimento:").append(this.comprimento).append("km |\n");
+        return sb.toString();
+    }
+
     private String printJogadores(List<Jogador> jogadores, int volta){
         StringBuilder sb = new StringBuilder();
         sb.append("||||| Posições na volta ").append(volta).append(" |||||\n");
@@ -73,11 +83,20 @@ public class Circuito {
         return sb.toString();
     }
 
+    /**
+     * Método que simula uma corrida simulando todos os setores presentes na mesma.
+     * O booleano halfDistance indica se a simulação irá decorrer na primeira metade ou na segunda metade da corrida.
+     * False - Primeira Metade | True - Segunda Metade
+     * @param jogadores Jogadores participantes na corrida
+     * @return String com os resultados da corrida onde contém todas as posições em cada volta da mesma
+     */
     public String SimularCorrida(List<Jogador> jogadores){
         StringBuilder result = new StringBuilder();
+        boolean halfDistance = false;
         for(int i=1; i<=numVoltas; i++){
+            halfDistance = i>numVoltas/2;
             for (Setor s: setores){
-                s.SimularSetor(jogadores, this.clima);
+                s.SimularSetor(jogadores, this.clima, halfDistance);
             }
             result.append(printJogadores(jogadores,i));
         }

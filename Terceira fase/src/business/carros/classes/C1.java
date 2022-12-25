@@ -48,9 +48,13 @@ public class C1 extends Classe {
      */
     public boolean DNF() {
         Random rand=new Random();
-        int x=rand.nextInt(100);
+        int x=rand.nextInt(101);
         return (x > super.getFiabilidade());
         //return false;
     }
 
+    @Override
+    public String toString() {
+        return "C1";
+    }
 }
