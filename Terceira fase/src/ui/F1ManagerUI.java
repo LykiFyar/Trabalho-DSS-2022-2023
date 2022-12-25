@@ -44,7 +44,8 @@ public class F1ManagerUI{
 
     private void jogarCampeonato() {
         try{
-            System.out.println("Qual campeonato pretente jogar?");
+            System.out.println("\n****** JOGAR CAMPEONATO ****** \n");
+            System.out.println("Qual campeonato pretende jogar?");
             System.out.println(this.campeonatos.printCampeonatos());
             String camp = scin.nextLine();
             try{
