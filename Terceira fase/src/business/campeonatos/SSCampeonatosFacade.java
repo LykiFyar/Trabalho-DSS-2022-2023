@@ -1,9 +1,9 @@
 package business.campeonatos;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import business.carros.Carro;
+import business.utilizadores.Utilizador;
 import data.PilotosDAO;
 import data.CampeonatoDAO;
 import data.CircuitoDAO;
@@ -26,9 +26,9 @@ public class SSCampeonatosFacade implements ISSCampeonados{
         this.pilotos.put("Max", new Piloto("Max",0.5f,0.5f));
 
         this.circuitos = new HashMap<>();
-        this.circuitos.put("C1",new Circuito("C1",3,true,10, null));
-        this.circuitos.put("C2",new Circuito("C2",3,true,20, null));
-        this.circuitos.put("C3",new Circuito("C3",3,true,30, null));
+        this.circuitos.put("C1",new Circuito("C1",3,true,10));
+        this.circuitos.put("C2",new Circuito("C2",3,true,20));
+        this.circuitos.put("C3",new Circuito("C3",3,true,30));
 
         this.campeonatos = new HashMap<>();
         this.campeonatos.put("Campeonato",new Campeonato());
@@ -65,7 +65,7 @@ public class SSCampeonatosFacade implements ISSCampeonados{
     @Override
     public void adicionaCircuito(String name, int numVoltas, List<Setor> setores, int comprimento) {
         boolean clima = new Random().nextInt(2) == 0;
-        Circuito c = new Circuito(name,numVoltas,clima,comprimento,null);
+        Circuito c = new Circuito(name,numVoltas,clima,comprimento);
         this.circuitos.put(name, c);
     }
 
@@ -80,9 +80,9 @@ public class SSCampeonatosFacade implements ISSCampeonados{
         this.campeonatos.put(name,c);
     }
 
-    @Override
-    public void addJogador(String username, Piloto piloto, Carro carro) {
-        // TODO: !!!!!!!!!!ESTE MÉTODO TEM PROBLEMAS!!!!!!!!!!1
+
+    public boolean addJogador(String campeonato, String nome, Utilizador utilizador, Piloto piloto, Carro carro) {
+        return this.campeonatos.get(campeonato).addJogador(nome,utilizador,piloto,carro);
     }
 
     public List<String> getCampeonatosNames(){
@@ -111,6 +111,10 @@ public class SSCampeonatosFacade implements ISSCampeonados{
         return this.campeonatos.get(campeonato).printJogador(nJogador);
     }
 
+    public String printCarro(String campeonato, int nJogador){
+        return this.campeonatos.get(campeonato).printCarro(nJogador);
+    }
+
     public boolean alterarPneu(String campeonato, int nJogador, int pneu){
         return this.campeonatos.get(campeonato).alterarPneu(nJogador, pneu);
     }
@@ -121,6 +125,22 @@ public class SSCampeonatosFacade implements ISSCampeonados{
 
     public boolean alterarFuncMotor(String campeonato, int nJogador, int m){
         return this.campeonatos.get(campeonato).alterarFuncMotor(nJogador, m);
+    }
+
+    public String printPilotos(){
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (Piloto p:this.pilotos.values()){
+            sb.append(i).append(" -> ").append(p.toString()).append("\n");
+            i++;
+        }
+        return sb.toString();
+    }
+
+    public List<String> getPilotosNames(){return new ArrayList<>(this.pilotos.keySet());}
+
+    public Piloto getPiloto(String piloto){
+        return this.pilotos.get(piloto).clone();
     }
 
 }

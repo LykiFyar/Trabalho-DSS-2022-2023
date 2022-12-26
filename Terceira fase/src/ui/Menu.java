@@ -119,7 +119,7 @@ public class Menu{
         System.out.println("\n *** BEM VINDO À SIMULAÇÃO DE CAMPEONATOS DE AUTOMOBILISMO *** ");
         System.out.println("\n *** "+this.titulo+" *** ");
         System.out.println("***************************************************************** ");
-        System.out.println("Insira o nr correspondente à sua opção: \n");
+        System.out.println("Insira o número correspondente à sua opção: \n");
         for (int i=0; i<this.opcoes.size(); i++) {
             System.out.print(i+1);
             System.out.print(" - ");

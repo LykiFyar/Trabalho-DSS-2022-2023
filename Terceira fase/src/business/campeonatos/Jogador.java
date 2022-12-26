@@ -5,14 +5,16 @@ import business.carros.Carro;
 import java.util.Random;
 
 public class Jogador {
+    private String nome;
     private int pontuacao;
     private Piloto piloto; // !Composição!
     private Carro carro; // !Composição!
 
-    public Jogador(Piloto p,Carro c){
+    public Jogador(String nome, Piloto p,Carro c){
+        this.nome = nome;
         this.pontuacao = 0;
-        this.carro = c.clone();
-        this.piloto = p.clone();
+        this.carro = c;  //clone ja foi feito antes
+        this.piloto = p; //clone ja foi feito antes
     } 
 
     /**
@@ -36,10 +38,17 @@ public class Jogador {
 
     @Override
     public String toString() {
+        /*
         StringBuilder sb = new StringBuilder();
         sb.append(carro.toString()).append("\n");
         sb.append(piloto.toString()).append("\n");
         return sb.toString();
+         */
+        return this.nome;
+    }
+
+    public String printCarro(){
+        return this.carro.toString2();
     }
 
     /**

@@ -49,12 +49,13 @@ public class F1ManagerUI{
             System.out.println("Qual campeonato pretente jogar?");
             List<String> campeonatos = this.campeonatos.getCampeonatosNames();
             for (int i=0; i<campeonatos.size();i++){
-                System.out.println((i+1) + "º -> " + campeonatos.get(i));
+                System.out.println((i+1) + " -> " + campeonatos.get(i));
             }
             int nCamp = scin.nextInt();
             scin.nextLine(); //consumir o \n
             String camp = campeonatos.get(nCamp-1);
             try{
+                participantes(camp);
                 for (int i=0; i<this.campeonatos.numCorridas(camp); i++){
                     configurarCorrida(camp,i);
                     System.out.println(this.campeonatos.jogarCampeonato(camp,i));
@@ -76,6 +77,7 @@ public class F1ManagerUI{
 
         for (int i=0; i<this.campeonatos.numJogadores(camp); i++){
             System.out.println(this.campeonatos.printJogador(camp,i));
+            System.out.println(this.campeonatos.printCarro(camp,i));
             System.out.println("Dejesa fazer alterações ao carro? S/N");
             String s = scin.nextLine();
             if (s.equals("S") || s.equals("s")){
@@ -145,5 +147,68 @@ public class F1ManagerUI{
             System.out.println("Modo de motor alterado com sucesso!");
         }
         else System.out.println("Modo de motor inserido inválido!");
+    }
+
+    private void participantes(String camp){
+        criarJogador(camp);
+        while (true){
+            System.out.println("Deseja adicionar mais jogadores? S/N");
+            String s = scin.nextLine();
+            if (s.equals("S") || s.equals("s")){
+                criarJogador(camp);
+            }
+            else break;
+        }
+    }
+
+    private void criarJogador(String camp){
+        while (true){
+            System.out.println("Insira o seu nome:");
+            String nome = scin.nextLine();
+            System.out.println("Dejesa fazer login em uma conta existente? S/N");
+            String s = scin.nextLine();
+            String username = null;
+            if (s.equals("S") || s.equals("s")){
+                username = login();
+            }
+            // Escolha do carro
+            System.out.println("Escolha um carro para utilizar no campeonato:");
+            System.out.println(this.carros.printCarros());
+            int c = scin.nextInt();
+            scin.nextLine(); //consumir o \n
+
+            // Escolha do piloto
+            List<String> pilotos = this.campeonatos.getPilotosNames();
+            System.out.println("Escolha um piloto para utilizar no campeonato:");
+            System.out.println(this.campeonatos.printPilotos());
+            int p = scin.nextInt();
+            scin.nextLine(); //consumir o \n
+            String piloto = pilotos.get(p-1);
+
+            if (this.campeonatos.addJogador(camp,nome,this.utilizadores.getUtilizador(username),this.campeonatos.getPiloto(piloto),this.carros.getCarro(c-1))){
+                System.out.println("Jogador adicionado com sucesso!");
+                break;
+            }
+            else System.out.println("Problema com a adição do jogador, tente novamente.");
+        }
+    }
+
+    private String login(){
+        while (true){
+            System.out.println("Insira um username ou X para cancelar o login:");
+            String username = scin.nextLine();
+            if (username.equals("X") || username.equals("x")) break;  // não pode existir um user com o nome X!
+            if (this.utilizadores.existeUtilizador(username)){
+                System.out.println("Insira a sua password:");
+                String password = scin.nextLine();
+                if (this.utilizadores.validaUserPassword(username,password)){
+                    System.out.println("Bem Vindo " + username + "!");
+                    return username;
+                }
+                else System.out.println("Password está incorreta!");
+            }
+            else System.out.println("Username não existe!");
+        }
+        return null;
     }
 }

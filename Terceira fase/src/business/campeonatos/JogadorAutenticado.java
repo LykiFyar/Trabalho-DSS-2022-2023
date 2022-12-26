@@ -6,8 +6,8 @@ import business.utilizadores.Utilizador;
 public class JogadorAutenticado extends Jogador {
     private Utilizador player; // !Agregação!
 
-    public JogadorAutenticado(Piloto p,Carro c,Utilizador u){
-        super(p,c);
+    public JogadorAutenticado(String n,Piloto p,Carro c,Utilizador u){
+        super(n,p,c);
         this.player = u;
     }
 

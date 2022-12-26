@@ -1,9 +1,11 @@
 package business.campeonatos;
 
 import business.carros.Carro;
-import business.carros.Classe;
 import business.carros.MotorICE;
 import business.carros.classes.C1;
+
+import business.carros.SSCarrosFacade;
+import business.utilizadores.Utilizador;
 
 import java.util.*;
 
@@ -16,14 +18,17 @@ public class Campeonato {
 
     public Campeonato(){
         this.nome = "Campeonato";
+        /*
         Jogador j1 = new Jogador(new Piloto("Ham", 0.5F, 0.5F),new Carro("Mercedes","AMG",0,0.5F,new MotorICE(6000,1000,1),new C1()));
         Jogador j2 = new Jogador(new Piloto("Max", 0.5F, 0.5F),new Carro("Red Bull","RB-18",0,0.5F,new MotorICE(6000,1000,1),new C1()));
         List<Jogador> jogadores= new ArrayList<>();
         jogadores.add(j1); jogadores.add(j2);
         this.jogadores = jogadores;
-        Circuito c1 = new Circuito("C1",3,true,10, this.jogadores);
-        Circuito c2 = new Circuito("C2",3,true,20, this.jogadores);
-        Circuito c3 = new Circuito("C3",3,false,30, this.jogadores);
+         */
+        this.jogadores = new ArrayList<>();
+        Circuito c1 = new Circuito("C1",3,true,10);
+        Circuito c2 = new Circuito("C2",3,true,20);
+        Circuito c3 = new Circuito("C3",3,false,30);
         List<Circuito> circuitos = new ArrayList<>();
         circuitos.add(c1); circuitos.add(c2); circuitos.add(c3);
         this.circuitos = circuitos;
@@ -66,6 +71,10 @@ public class Campeonato {
         return this.jogadores.get(nJogador).toString();
     }
 
+    public String printCarro(int nJogador){
+        return this.jogadores.get(nJogador).printCarro();
+    }
+
     public boolean alterarPneu(int nJogador, int pneu){
         return this.jogadores.get(nJogador).alterarPneu(pneu);
     }
@@ -76,6 +85,20 @@ public class Campeonato {
 
     public boolean alterarFuncMotor(int nJogador, int m){
         return this.jogadores.get(nJogador).alterarFuncMotor(m);
+    }
+
+
+    public boolean addJogador(String nome, Utilizador utilizador, Piloto piloto, Carro carro){
+        if (piloto == null || carro == null){
+            return false;
+        }
+        Jogador j = null;
+        if (utilizador != null){
+            j = new JogadorAutenticado(nome,piloto,carro,utilizador);
+        }
+        else j = new JogadorAnonimo(nome,piloto,carro);
+        this.jogadores.add(j);
+        return true;
     }
 
     // TODO: Completar esta classe

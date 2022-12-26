@@ -150,6 +150,16 @@ public class Carro {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Carro - ").append(this.marca).append("-").append(this.modelo);
+        sb.append("\n     Pneu:").append(this.getPneuS());
+        sb.append("\n     Pac:").append(this.pac);
+        sb.append("\n     MotorICE:").append(this.motorICE.toString());
+        sb.append("\n     Classe:").append(this.classe.toString());
+        return sb.toString();
+    }
+
+    public String toString2() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Carro - ").append(this.marca).append("-").append(this.modelo);
         sb.append("\nPneu:").append(this.getPneuS());
         sb.append("\nPac:").append(this.pac);
         sb.append("\nMotorICE:").append(this.motorICE.toString());

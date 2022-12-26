@@ -7,4 +7,8 @@ public interface ISSCarros {
 
     public boolean validarCilindrada(int cilindrada, Classe classe);
 
+    public String printCarros();
+
+    public Carro getCarro(int carro);
+
 }

@@ -17,7 +17,7 @@ public class Circuito {
     
     private Circuito(){}
 
-    public Circuito(String nome, int numVoltas, boolean clima, int comprimento, List<Jogador> participantes){
+    public Circuito(String nome, int numVoltas, boolean clima, int comprimento){
         this.nome = nome;
         this.numVoltas = numVoltas;
         this.clima = clima;
@@ -28,7 +28,7 @@ public class Circuito {
         List<Setor> setores = new ArrayList<>();
         setores.add(s1); setores.add(s2); setores.add(s3);
         this.setores = setores;
-        this.participantes = participantes;
+        this.participantes = null;
         this.dnf = new HashMap<Jogador,Integer>();
     }
 
@@ -76,8 +76,7 @@ public class Circuito {
 
         int i=1;
         for (Jogador j:jogadores){
-            sb.append("Jogador na posição ").append(i).append("\n");
-            sb.append(j.toString()).append("\n");
+            sb.append(i).append("º -> ").append(j.toString()).append("\n");
             i++;
         }
         return sb.toString();
