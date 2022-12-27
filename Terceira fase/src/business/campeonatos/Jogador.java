@@ -4,6 +4,8 @@ import business.carros.Carro;
 
 import java.util.Random;
 
+import static business.util.toTitleCase;
+
 public class Jogador {
     private String nome;
     private int pontuacao;
@@ -44,11 +46,11 @@ public class Jogador {
         sb.append(piloto.toString()).append("\n");
         return sb.toString();
          */
-        return this.nome;
+        return toTitleCase(this.nome);
     }
 
     public String printCarro(){
-        return this.carro.toString2();
+        return this.carro.toString();
     }
 
     /**
@@ -130,5 +132,12 @@ public class Jogador {
             return true;
         }
         else return false;
+    }
+
+    public boolean dnf(int volta){
+        if (this.carro.dnf(volta, this.piloto)){
+            return true;
+        }
+        else return this.piloto.dnf();
     }
 }

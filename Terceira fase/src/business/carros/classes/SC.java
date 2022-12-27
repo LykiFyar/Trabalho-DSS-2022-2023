@@ -1,6 +1,9 @@
 package business.carros.classes;
 
+import business.campeonatos.Piloto;
 import business.carros.Classe;
+
+import java.util.Random;
 
 public class SC extends Classe {
     
@@ -38,5 +41,16 @@ public class SC extends Classe {
     @Override
     public String toString() {
         return "SC";
+    }
+
+    @Override
+    public boolean dnf(int cilindrada, int volta, Piloto piloto) {
+        Random rand=new Random();
+        int x=rand.nextInt(65);
+        float sva = -(piloto.getSva() * 10);
+        int fiabilidade = (int)(sva*0.75) + (int)((cilindrada/10)*0.25);
+        //System.out.println("Fiabilidade: "+fiabilidade);
+        //System.out.println("Random: "+x);
+        return (x > fiabilidade);
     }
 }

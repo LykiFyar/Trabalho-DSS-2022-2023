@@ -1,6 +1,9 @@
 package business.carros.classes;
 
+import business.campeonatos.Piloto;
 import business.carros.Classe;
+
+import java.util.Random;
 
 public class GT extends Classe {
 
@@ -47,5 +50,14 @@ public class GT extends Classe {
     @Override
     public String toString() {
         return "GT";
+    }
+
+    @Override
+    public boolean dnf(int cilindrada, int volta, Piloto piloto) {
+        Random rand=new Random();
+        int x=rand.nextInt(80);
+        int fiabilidade = (int)((100000/cilindrada)*2.55);
+        int desgaste = (int)((volta)*this.taxaDeterioracao); //taxDeterioracao a cada volta
+        return (x > (fiabilidade - desgaste));
     }
 }

@@ -1,5 +1,7 @@
 package business.carros;
 
+import business.campeonatos.Piloto;
+
 public abstract class Classe {
     private int minCilindrada;
     private int maxCilindrada;
@@ -69,5 +71,7 @@ public abstract class Classe {
 
     @Override
     public abstract Classe clone();
-    
+
+    public abstract boolean dnf(int cilindrada, int volta, Piloto piloto);
+
 }

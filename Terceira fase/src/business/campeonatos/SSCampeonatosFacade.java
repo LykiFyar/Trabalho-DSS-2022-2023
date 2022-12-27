@@ -85,6 +85,10 @@ public class SSCampeonatosFacade implements ISSCampeonados{
         return this.campeonatos.get(campeonato).addJogador(nome,utilizador,piloto,carro);
     }
 
+    public void reset(String campeonato){
+        this.campeonatos.get(campeonato).reset();
+    }
+
     public List<String> getCampeonatosNames(){
         return new ArrayList<>(this.campeonatos.keySet());
     }
@@ -131,7 +135,7 @@ public class SSCampeonatosFacade implements ISSCampeonados{
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Piloto p:this.pilotos.values()){
-            sb.append(i).append(" -> ").append(p.toString()).append("\n");
+            sb.append(i).append(" ---> ").append(p.toString()).append("\n");
             i++;
         }
         return sb.toString();

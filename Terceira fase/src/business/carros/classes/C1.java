@@ -1,5 +1,6 @@
 package business.carros.classes;
 
+import business.campeonatos.Piloto;
 import business.carros.Classe;
 
 import java.util.Random;
@@ -46,9 +47,9 @@ public class C1 extends Classe {
      * Random entre 0-100.
      * @return Boolean
      */
-    public boolean DNF() {
+    public boolean dnf(int cilindrada, int volta, Piloto piloto) {
         Random rand=new Random();
-        int x=rand.nextInt(101);
+        int x=rand.nextInt(100);
         return (x > super.getFiabilidade());
         //return false;
     }

@@ -1,6 +1,9 @@
 package business.carros.classes;
 
+import business.campeonatos.Piloto;
 import business.carros.Hibrido;
+
+import java.util.Random;
 
 public class C1H extends C1 implements Hibrido {
     private int motorEletrico;
@@ -50,5 +53,14 @@ public class C1H extends C1 implements Hibrido {
     @Override
     public String toString() {
         return "C1H";
+    }
+
+    @Override
+    public boolean dnf(int cilindrada, int volta, Piloto piloto) {
+        Random rand=new Random();
+        int x=rand.nextInt(100);
+        int motorH = this.getPotenciaMotorEletrico()/20;
+        return (x > super.getFiabilidade()-motorH);
+        //return false;
     }
 }

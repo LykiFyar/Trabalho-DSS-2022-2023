@@ -39,7 +39,7 @@ public class SSCarrosFacade implements ISSCarros{
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Carro c:this.carros){
-            sb.append(i).append(" -> ").append(c.toString()).append("\n");
+            sb.append(i).append(" ---> ").append(c.toString()).append("\n");
             i++;
         }
         return sb.toString();

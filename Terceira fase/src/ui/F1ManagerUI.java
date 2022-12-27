@@ -76,8 +76,8 @@ public class F1ManagerUI{
         System.out.println(this.campeonatos.printCorrida(camp,nCorrida));
 
         for (int i=0; i<this.campeonatos.numJogadores(camp); i++){
-            System.out.println(this.campeonatos.printJogador(camp,i));
-            System.out.println(this.campeonatos.printCarro(camp,i));
+            System.out.println("Jogador: " + this.campeonatos.printJogador(camp,i));
+            System.out.println("Carro: " + this.campeonatos.printCarro(camp,i));
             System.out.println("Dejesa fazer alterações ao carro? S/N");
             String s = scin.nextLine();
             if (s.equals("S") || s.equals("s")){
@@ -150,6 +150,7 @@ public class F1ManagerUI{
     }
 
     private void participantes(String camp){
+        this.campeonatos.reset(camp);
         criarJogador(camp);
         while (true){
             System.out.println("Deseja adicionar mais jogadores? S/N");

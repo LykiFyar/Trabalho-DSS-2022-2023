@@ -58,7 +58,8 @@ public class Setor {
      * @param clima True-chuva | False-seco
      * @param halfDistance Indica se a simulação está a decorrer na primeira ou na segunda metade da corrida
      */
-    public void SimularSetor(List<Jogador> jogadores, boolean clima, boolean halfDistance){
+    public String SimularSetor(List<Jogador> jogadores, boolean clima, boolean halfDistance, int nSetor){
+        StringBuilder sb = new StringBuilder();
         List<Float> tempos = new ArrayList<>();
         for (Jogador j:jogadores){
             float tempo = j.calcularTempo(tipoSetor,clima, halfDistance);
@@ -70,9 +71,13 @@ public class Setor {
             float t1 = tempos.get(i);
             float t2 = tempos.get(j);
             if(checkOvertake(t1,t2)){
+                sb.append("O jogador ").append(jogadores.get(j));
+                sb.append(" ultrapassou o jogador ").append(jogadores.get(i));
+                sb.append(" no ").append(nSetor).append("º setor!\n");
                 swap(jogadores,i,j);
                 swap(tempos,i,j);
             }
         }
+        return sb.toString();
     }
 }

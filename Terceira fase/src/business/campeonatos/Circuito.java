@@ -12,7 +12,7 @@ public class Circuito {
     private boolean clima; // true-chove | false-seco
     private int comprimento;
     private List<Setor> setores; // acho que faz sentido ter uma lista porque há uma noção de ordem nos setores.
-    private List<Jogador> participantes; // terá a ordem dos jogadores na corrida
+    //private List<Jogador> participantes; // terá a ordem dos jogadores na corrida
     private Map<Jogador,Integer> dnf;
     
     private Circuito(){}
@@ -28,7 +28,7 @@ public class Circuito {
         List<Setor> setores = new ArrayList<>();
         setores.add(s1); setores.add(s2); setores.add(s3);
         this.setores = setores;
-        this.participantes = null;
+        //this.participantes = null;
         this.dnf = new HashMap<Jogador,Integer>();
     }
 
@@ -52,9 +52,7 @@ public class Circuito {
         return setores;
     }
 
-    public List<Jogador> getParticipantes() {
-        return participantes;
-    }
+    //public List<Jogador> getParticipantes() {return participantes;}
 
     public Map<Jogador, Integer> getDnf() {
         return dnf;
@@ -72,7 +70,7 @@ public class Circuito {
 
     private String printJogadores(List<Jogador> jogadores, int volta){
         StringBuilder sb = new StringBuilder();
-        sb.append("||||| Posições na volta ").append(volta).append(" |||||\n");
+        sb.append("\n||||| Posições na volta ").append(volta).append(" |||||\n");
 
         int i=1;
         for (Jogador j:jogadores){
@@ -80,6 +78,18 @@ public class Circuito {
             i++;
         }
         return sb.toString();
+    }
+
+    private String dnf(List<Jogador> jogadores, int volta){
+        StringBuilder dnf = new StringBuilder();
+        for (Jogador j:jogadores){
+            if (j.dnf(volta)){
+                dnf.append("O jogador ").append(j.toString()).append(" parou na volta ").append(volta).append("\n");
+                this.dnf.put(j,volta);
+                jogadores.remove(j);
+            }
+        }
+        return dnf.toString();
     }
 
     /**
@@ -91,15 +101,25 @@ public class Circuito {
      */
     public String SimularCorrida(List<Jogador> jogadores){
         StringBuilder result = new StringBuilder();
+        StringBuilder ultrapassagens = new StringBuilder();
         boolean halfDistance = false;
         for(int i=1; i<=numVoltas; i++){
+            ultrapassagens.append(dnf(jogadores,i));
             halfDistance = i>numVoltas/2;
+            int nSetor = 1;
             for (Setor s: setores){
-                s.SimularSetor(jogadores, this.clima, halfDistance);
+                ultrapassagens.append(s.SimularSetor(jogadores, this.clima, halfDistance,nSetor));
+                nSetor++;
             }
-            result.append(printJogadores(jogadores,i));
+            result.append(printJogadores(jogadores,i)).append(ultrapassagens);
+            ultrapassagens = new StringBuilder();
         }
+        jogadores.addAll(dnf.keySet());
         return result.toString();
+    }
+
+    public void reset(){
+        this.dnf = new HashMap<>();
     }
 
     // TODO: Completar esta classe

@@ -101,5 +101,12 @@ public class Campeonato {
         return true;
     }
 
+    public void reset(){
+        this.jogadores = new ArrayList<>();
+        for (Circuito c:this.circuitos){
+            c.reset();
+        }
+    }
+
     // TODO: Completar esta classe
 }

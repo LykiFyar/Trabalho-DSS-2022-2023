@@ -1,6 +1,9 @@
 package business.carros.classes;
 
+import business.campeonatos.Piloto;
 import business.carros.Hibrido;
+
+import java.util.Random;
 
 public class GTH extends GT implements Hibrido {
     private int motorEletrico;
@@ -50,5 +53,15 @@ public class GTH extends GT implements Hibrido {
     @Override
     public String toString() {
         return "GTH";
+    }
+
+    @Override
+    public boolean dnf(int cilindrada, int volta, Piloto piloto) {
+        Random rand=new Random();
+        int x=rand.nextInt(80);
+        int fiabilidade = (int)((100000/cilindrada)*2.55);
+        int desgaste = (int)((volta)*this.getTaxaDeterioracao()); //taxDeterioracao a cada volta
+        int motorH = this.getPotenciaMotorEletrico()/20;
+        return (x > (fiabilidade - desgaste - motorH));
     }
 }

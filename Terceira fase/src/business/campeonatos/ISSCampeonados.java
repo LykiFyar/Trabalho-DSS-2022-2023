@@ -31,6 +31,8 @@ public interface ISSCampeonados {
 
     public boolean addJogador(String campeonato, String nome, Utilizador utilizador, Piloto piloto, Carro carro);
 
+    public void reset(String campeonato);
+
     public List<String> getCampeonatosNames();
 
     public String jogarCampeonato(String name, int corrida);
