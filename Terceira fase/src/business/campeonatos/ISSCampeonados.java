@@ -37,6 +37,8 @@ public interface ISSCampeonados {
 
     public String jogarCampeonato(String name, int corrida);
 
+    public String printResultados(String campeonato);
+
     public int numCorridas(String name);
 
     public String printCorrida(String campeonato, int nCorrida);

@@ -63,4 +63,9 @@ public class C1H extends C1 implements Hibrido {
         return (x > super.getFiabilidade()-motorH);
         //return false;
     }
+
+    @Override
+    public boolean isHibrid() {
+        return true;
+    }
 }

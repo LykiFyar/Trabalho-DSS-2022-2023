@@ -53,4 +53,9 @@ public class SC extends Classe {
         //System.out.println("Random: "+x);
         return (x > fiabilidade);
     }
+
+    @Override
+    public boolean isHibrid() {
+        return false;
+    }
 }

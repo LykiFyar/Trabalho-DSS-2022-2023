@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import data.UtilizadoresDAO;
 
+import static business.util.printMapSortedByValue;
+
 public class SSUtilizadoresFacade implements ISSUtilizadores {
     Map<String,Utilizador> utilizadores;
 
@@ -38,5 +40,15 @@ public class SSUtilizadoresFacade implements ISSUtilizadores {
     public Utilizador getUtilizador(String username){
         return this.utilizadores.get(username);
     }
-    
+
+    @Override
+    public String classificacaoGlobal() {
+        StringBuilder sb = new StringBuilder();
+        Map<String,Integer> utilizadores = new HashMap<>();
+        for (Map.Entry<String, Utilizador> entry : this.utilizadores.entrySet()){
+            utilizadores.put(entry.getKey(), entry.getValue().getPontuacaoGeral());
+        }
+        sb.append(printMapSortedByValue(utilizadores));
+        return sb.toString();
+    }
 }

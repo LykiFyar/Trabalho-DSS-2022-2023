@@ -140,4 +140,12 @@ public class Jogador {
         }
         else return this.piloto.dnf();
     }
+
+    public boolean isHibrid(){
+        return this.carro.isHibrid();
+    }
+
+    public int addPontuacao(int pontuacao){
+        return this.pontuacao += pontuacao;
+    }
 }

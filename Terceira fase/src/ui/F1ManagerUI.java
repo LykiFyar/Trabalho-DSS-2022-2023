@@ -26,10 +26,12 @@ public class F1ManagerUI{
 
     public F1ManagerUI(){
         this.menu = new Menu(new String[]{
-                "Jogar Campeonato"
+                "Jogar Campeonato",
+                "Ver classificação global"
         });
 
         this.menu.setHandler(1,this::jogarCampeonato);
+        this.menu.setHandler(2,this::classificacaoGlobal);
 
         this.campeonatos = new SSCampeonatosFacade();
         this.carros = new SSCarrosFacade();
@@ -62,6 +64,9 @@ public class F1ManagerUI{
                     System.out.println("Prime enter para simular a próxima corrida!\n");
                     String enter = scin.nextLine();
                 }
+                System.out.println(this.campeonatos.printResultados(camp));
+                System.out.println("Prime enter para sair!\n");
+                String enter = scin.nextLine();
             }
             catch (NullPointerException e){
                 System.out.println("O campeonato inserido não existe");
@@ -211,5 +216,11 @@ public class F1ManagerUI{
             else System.out.println("Username não existe!");
         }
         return null;
+    }
+
+
+    private void classificacaoGlobal() {
+        System.out.println("||||| Classificação Global |||||");
+        System.out.println(this.utilizadores.classificacaoGlobal());
     }
 }

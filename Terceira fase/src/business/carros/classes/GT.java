@@ -60,4 +60,11 @@ public class GT extends Classe {
         int desgaste = (int)((volta)*this.taxaDeterioracao); //taxDeterioracao a cada volta
         return (x > (fiabilidade - desgaste));
     }
+
+    @Override
+    public boolean isHibrid() {
+        return false;
+    }
+
+
 }

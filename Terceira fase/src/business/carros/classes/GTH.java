@@ -64,4 +64,9 @@ public class GTH extends GT implements Hibrido {
         int motorH = this.getPotenciaMotorEletrico()/20;
         return (x > (fiabilidade - desgaste - motorH));
     }
+
+    @Override
+    public boolean isHibrid() {
+        return true;
+    }
 }

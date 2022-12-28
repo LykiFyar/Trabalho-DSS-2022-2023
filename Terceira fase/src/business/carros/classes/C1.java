@@ -58,4 +58,8 @@ public class C1 extends Classe {
     public String toString() {
         return "C1";
     }
+
+    public boolean isHibrid(){
+        return false;
+    }
 }

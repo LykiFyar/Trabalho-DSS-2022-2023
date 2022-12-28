@@ -62,4 +62,9 @@ public class C2H extends C2 implements Hibrido {
         return (x > super.getFiabilidade() + (cilindrada/1200) - motorH);
         //return false;
     }
+
+    @Override
+    public boolean isHibrid() {
+        return true;
+    }
 }

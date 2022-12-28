@@ -82,6 +82,7 @@ public class Piloto {
         Random rand = new Random();
         int random = rand.nextInt(100);
         return this.sva * (float) random > 65;
+        //return true;
     }
 
 }

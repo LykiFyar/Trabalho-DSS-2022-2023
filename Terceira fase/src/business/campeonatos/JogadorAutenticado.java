@@ -11,8 +11,8 @@ public class JogadorAutenticado extends Jogador {
         this.player = u;
     }
 
-    public void addPontuacaoInPlayer(){
-        int newPont = super.getPontuacao() + player.getPontuacaoGeral();
+    public void addPontuacaoInPlayer(int pontuacao){
+        int newPont = pontuacao + player.getPontuacaoGeral();
         player.setPontuacaoGeral(newPont);
     }
 }

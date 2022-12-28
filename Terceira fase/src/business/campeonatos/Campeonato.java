@@ -9,6 +9,9 @@ import business.utilizadores.Utilizador;
 
 import java.util.*;
 
+import static business.util.printMapSortedByValue;
+import static business.util.sortMap;
+
 public class Campeonato {
     private String nome;
     private List<Circuito> circuitos;
@@ -54,9 +57,84 @@ public class Campeonato {
         return this.circuitos.size();
     }
 
+    public int pontuacao(int posicao){
+        int pontos = 0;
+        int[] pontuacoes = new int[]{12,10,8,7,6,5,4,3,2,1}; //Pountuações
+        if (posicao<pontuacoes.length){
+            pontos = pontuacoes[posicao];
+        }
+        return pontos;
+    }
+
     public String SimularCampeonato(int corrida){
         Circuito c = this.circuitos.get(corrida);
-        return c.SimularCorrida(jogadores);
+        String result = c.SimularCorrida(jogadores);
+        int e=0, h=0;
+        for (Jogador j:jogadores){
+            if (j.isHibrid()){
+                this.classificacaoH.put(j.toString(), j.addPontuacao(pontuacao(h)));
+                h++;
+            }
+            else{
+                this.classificacao.put(j.toString(), j.addPontuacao(pontuacao(e)));
+                e++;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Esta função imprime os resultados do campeonato e também adiciona as pontuações dos jogadores aos respetivos utilizadores.
+     * @return Resultados do campeonato.
+     */
+    public String printResultados(){
+        StringBuilder sb = new StringBuilder();
+        if (!this.classificacao.isEmpty()){
+            sb.append("Classificação dos carros ICE!\n");
+            Map<String,Integer> classificacao = new HashMap<>();
+            for (Map.Entry<String, Integer> entry : this.classificacao.entrySet()){
+                classificacao.put(entry.getKey(), entry.getValue());
+            }
+            sb.append(printMapSortedByValue(classificacao));
+        }
+        if (!this.classificacaoH.isEmpty()){
+            sb.append("Classificação dos carros Hibrido!\n");
+            Map<String,Integer> classificacaoH = new HashMap<>();
+            for (Map.Entry<String, Integer> entry : this.classificacao.entrySet()){
+                classificacaoH.put(entry.getKey(), entry.getValue());
+            }
+            sb.append(printMapSortedByValue(classificacaoH));
+        }
+        List<String> resultados = new ArrayList<>();
+        resultados.addAll(sortMap(this.classificacao).keySet());
+        resultados.addAll(sortMap(this.classificacaoH).keySet());
+
+        List<Jogador> ordemJogadores = new ArrayList<>();
+        for (String s:resultados){
+            for (Jogador j:this.jogadores){
+                if (j.toString().equals(s)){
+                    ordemJogadores.add(j);
+                    break;
+                }
+            }
+        }
+
+        int e=0, h=0;
+        for (Jogador j:ordemJogadores){
+            if (j.isHibrid()){
+                if (j.getClass().equals(JogadorAutenticado.class)){
+                    ((JogadorAutenticado) j).addPontuacaoInPlayer(pontuacao(h));
+                }
+                h++;
+            }
+            else{
+                if (j.getClass().equals(JogadorAutenticado.class)){
+                    ((JogadorAutenticado) j).addPontuacaoInPlayer(pontuacao(e));
+                }
+                e++;
+            }
+        }
+        return sb.toString();
     }
 
     public String printCorrida(int nCorrida){
@@ -106,6 +184,8 @@ public class Campeonato {
         for (Circuito c:this.circuitos){
             c.reset();
         }
+        this.classificacao = new HashMap<>();
+        this.classificacaoH = new HashMap<>();
     }
 
     // TODO: Completar esta classe

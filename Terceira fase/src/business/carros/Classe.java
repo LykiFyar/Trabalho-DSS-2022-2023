@@ -74,4 +74,6 @@ public abstract class Classe {
 
     public abstract boolean dnf(int cilindrada, int volta, Piloto piloto);
 
+    public abstract boolean isHibrid();
+
 }

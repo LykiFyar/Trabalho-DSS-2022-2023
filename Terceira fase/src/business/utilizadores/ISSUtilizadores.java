@@ -9,4 +9,5 @@ public interface ISSUtilizadores {
 
     public Utilizador getUtilizador(String username);
 
+    public String classificacaoGlobal();
 }

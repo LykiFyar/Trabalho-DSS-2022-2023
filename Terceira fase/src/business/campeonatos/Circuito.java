@@ -1,7 +1,6 @@
 package business.campeonatos;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,7 @@ public class Circuito {
     private boolean clima; // true-chove | false-seco
     private int comprimento;
     private List<Setor> setores; // acho que faz sentido ter uma lista porque há uma noção de ordem nos setores.
-    //private List<Jogador> participantes; // terá a ordem dos jogadores na corrida
+    private List<Jogador> participantes; // terá a ordem dos jogadores na corrida
     private Map<Jogador,Integer> dnf;
     
     private Circuito(){}
@@ -81,10 +80,11 @@ public class Circuito {
     }
 
     private String dnf(List<Jogador> jogadores, int volta){
+        List<Jogador> aux = new ArrayList<>(jogadores);
         StringBuilder dnf = new StringBuilder();
-        for (Jogador j:jogadores){
+        for (Jogador j:aux){
             if (j.dnf(volta)){
-                dnf.append("O jogador ").append(j.toString()).append(" parou na volta ").append(volta).append("\n");
+                dnf.append("O jogador ").append(j).append(" parou na volta ").append(volta).append("\n");
                 this.dnf.put(j,volta);
                 jogadores.remove(j);
             }
@@ -102,6 +102,10 @@ public class Circuito {
     public String SimularCorrida(List<Jogador> jogadores){
         StringBuilder result = new StringBuilder();
         StringBuilder ultrapassagens = new StringBuilder();
+
+        this.participantes = new ArrayList<>(jogadores);
+        result.append(printJogadores(participantes,0));
+
         boolean halfDistance = false;
         for(int i=1; i<=numVoltas; i++){
             ultrapassagens.append(dnf(jogadores,i));
@@ -111,7 +115,10 @@ public class Circuito {
                 ultrapassagens.append(s.SimularSetor(jogadores, this.clima, halfDistance,nSetor));
                 nSetor++;
             }
-            result.append(printJogadores(jogadores,i)).append(ultrapassagens);
+            this.participantes = new ArrayList<>(jogadores);
+            this.participantes.addAll(dnf.keySet());
+
+            result.append(printJogadores(this.participantes,i)).append(ultrapassagens);
             ultrapassagens = new StringBuilder();
         }
         jogadores.addAll(dnf.keySet());
@@ -120,6 +127,7 @@ public class Circuito {
 
     public void reset(){
         this.dnf = new HashMap<>();
+        this.participantes = new ArrayList<>();
     }
 
     // TODO: Completar esta classe

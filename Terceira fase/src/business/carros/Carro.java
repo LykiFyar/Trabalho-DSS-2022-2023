@@ -160,4 +160,8 @@ public class Carro {
     public boolean dnf(int volta, Piloto piloto){
         return this.classe.dnf(this.getMotorICE().getCilindrada(), volta, piloto);
     }
+
+    public boolean isHibrid(){
+        return this.classe.isHibrid();
+    }
 }

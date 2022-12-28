@@ -99,6 +99,10 @@ public class SSCampeonatosFacade implements ISSCampeonados{
         return campeonato.SimularCampeonato(corrida);
     }
 
+    public String printResultados(String campeonato){
+        return this.campeonatos.get(campeonato).printResultados();
+    }
+
     public int numCorridas(String name){
         return this.campeonatos.get(name).numCorridas();
     }

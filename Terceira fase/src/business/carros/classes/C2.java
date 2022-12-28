@@ -50,4 +50,9 @@ public class C2 extends Classe {
         return (x > super.getFiabilidade() + (cilindrada/1200));
         //return false;
     }
+
+    @Override
+    public boolean isHibrid() {
+        return false;
+    }
 }
