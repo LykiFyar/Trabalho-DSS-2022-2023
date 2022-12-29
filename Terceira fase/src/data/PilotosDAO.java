@@ -103,7 +103,21 @@ public class PilotosDAO implements Map<String,Piloto> {
     @Override
     public Set<String> keySet() {
         // TODO Auto-generated method stub
-        throw new NullPointerException("Not implemented!");
+        Set<String> res = new HashSet<>();
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             Statement stm = conn.createStatement();
+             ResultSet rs = stm.executeQuery("SELECT Id FROM Pilotos")) {
+            while (rs.next()) {
+                int idp = rs.getInt("Id");
+                String p = this.get(idp).getNome();
+                res.add(p);
+            }
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return res;
     }
 
     @Override
@@ -179,7 +193,7 @@ public class PilotosDAO implements Map<String,Piloto> {
              Statement stm = conn.createStatement();
              ResultSet rs = stm.executeQuery("SELECT Id FROM Pilotos")) {
             while (rs.next()) {
-                String idp = rs.getString("Id");
+                int idp = rs.getInt("Id");
                 Piloto p = this.get(idp);
                 res.add(p);
             }
