@@ -188,5 +188,13 @@ public class Campeonato {
         this.classificacaoH = new HashMap<>();
     }
 
+    public String getNome(){
+        return this.nome;
+    }
+
+    public List<Circuito> getCircuitos(){
+        return this.circuitos;
+    }
+
     // TODO: Completar esta classe
 }
