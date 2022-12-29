@@ -59,7 +59,7 @@ public class Campeonato {
 
     public int pontuacao(int posicao){
         int pontos = 0;
-        int[] pontuacoes = new int[]{12,10,8,7,6,5,4,3,2,1}; //Pountuações
+        int[] pontuacoes = new int[]{12,10,8,7,6,5,4,3,2,1}; //Pontuações
         if (posicao<pontuacoes.length){
             pontos = pontuacoes[posicao];
         }
@@ -91,18 +91,12 @@ public class Campeonato {
         StringBuilder sb = new StringBuilder();
         if (!this.classificacao.isEmpty()){
             sb.append("Classificação dos carros ICE!\n");
-            Map<String,Integer> classificacao = new HashMap<>();
-            for (Map.Entry<String, Integer> entry : this.classificacao.entrySet()){
-                classificacao.put(entry.getKey(), entry.getValue());
-            }
+            Map<String, Integer> classificacao = new HashMap<>(this.classificacao);
             sb.append(printMapSortedByValue(classificacao));
         }
         if (!this.classificacaoH.isEmpty()){
             sb.append("Classificação dos carros Hibrido!\n");
-            Map<String,Integer> classificacaoH = new HashMap<>();
-            for (Map.Entry<String, Integer> entry : this.classificacao.entrySet()){
-                classificacaoH.put(entry.getKey(), entry.getValue());
-            }
+            Map<String, Integer> classificacaoH = new HashMap<>(this.classificacao);
             sb.append(printMapSortedByValue(classificacaoH));
         }
         List<String> resultados = new ArrayList<>();

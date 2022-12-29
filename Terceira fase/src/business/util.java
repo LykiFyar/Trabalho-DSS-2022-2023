@@ -50,8 +50,8 @@ public class util {
             }
             sortedMap.get(entry.getValue()).add(entry.getKey());
         }
-        Map<String,Integer> res = new HashMap<>();
-        for (Map.Entry<Integer, List<String>> entry : sortedMap.entrySet()) {
+        Map<String,Integer> res = new LinkedHashMap<>();
+        for (Map.Entry<Integer, List<String>> entry : sortedMap.descendingMap().entrySet()) {
             for (String key : entry.getValue()){
                 res.put(key, entry.getKey());
             }

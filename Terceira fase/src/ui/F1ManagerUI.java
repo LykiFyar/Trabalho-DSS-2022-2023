@@ -157,6 +157,7 @@ public class F1ManagerUI{
     private void participantes(String camp){
         this.campeonatos.reset(camp);
         criarJogador(camp);
+        criarJogador(camp);
         while (true){
             System.out.println("Deseja adicionar mais jogadores? S/N");
             String s = scin.nextLine();
@@ -222,5 +223,7 @@ public class F1ManagerUI{
     private void classificacaoGlobal() {
         System.out.println("||||| Classificação Global |||||");
         System.out.println(this.utilizadores.classificacaoGlobal());
+        System.out.println("Prime enter para sair!\n");
+        String enter = scin.nextLine();
     }
 }
