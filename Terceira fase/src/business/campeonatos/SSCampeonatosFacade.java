@@ -22,8 +22,8 @@ public class SSCampeonatosFacade implements ISSCampeonados{
          */
 
         this.pilotos = new HashMap<>();
-        this.pilotos.put("Ham", new Piloto("Ham",0.5f,0.5f));
-        this.pilotos.put("Max", new Piloto("Max",0.5f,0.5f));
+        this.pilotos.put("Ham", new Piloto(0,"Ham",0.5f,0.5f));
+        this.pilotos.put("Max", new Piloto(1,"Max",0.5f,0.5f));
 
         this.circuitos = new HashMap<>();
         this.circuitos.put("C1",new Circuito("C1",3,true,10));
@@ -52,8 +52,8 @@ public class SSCampeonatosFacade implements ISSCampeonados{
     }
 
     @Override
-    public void addPiloto(String name, float cts, float sva) {
-        Piloto newPiloto = new Piloto(name, cts, sva);
+    public void addPiloto(int id, String name, float cts, float sva) {
+        Piloto newPiloto = new Piloto(id, name, cts, sva);
         this.pilotos.put(name, newPiloto);
     }
 
