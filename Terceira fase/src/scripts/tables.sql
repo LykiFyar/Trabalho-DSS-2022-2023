@@ -4,7 +4,7 @@ USE Simulação;
 -- CREATES THE "CAMPEONATOS" TABLE
 -- -------------------------------------
 CREATE TABLE IF NOT EXISTS `Simulação`.`Campeonatos` (
- Id INT NOT NULL,
+ Id INT NOT NULL AUTO_INCREMENT,
  Nome VARCHAR(255) NOT NULL,
  PRIMARY KEY (Id));
 
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `Simulação`.`Campeonatos` (
 -- CREATES THE "CIRCUITOS" TABLE
 -- -------------------------------------
 CREATE TABLE IF NOT EXISTS `Simulação`.`Circuitos` (
- Id INT NOT NULL,
+ Id INT NOT NULL AUTO_INCREMENT,
  Nome VARCHAR(255) NOT NULL,
  Clima VARCHAR(255) NOT NULL,
  Voltas INT NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `Simulação`.`Circuitos` (
 -- -------------------------------------
 
 CREATE TABLE IF NOT EXISTS `Simulação`.`Carros` (
- Id INT NOT NULL,
+ Id INT NOT NULL AUTO_INCREMENT,
  Marca VARCHAR(255) NOT NULL,
  Modelo VARCHAR(255) NOT NULL,
  PRIMARY KEY (Id));
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `Simulação`.`Carros` (
 -- -------------------------------------
 
 CREATE TABLE IF NOT EXISTS `Simulação`.`Pilotos` (
- Id INT NOT NULL,
+ Id INT NOT NULL AUTO_INCREMENT,
  Nome VARCHAR(255) NOT NULL,
  CTS DECIMAL (5,2), -- consegue guardar valores entre -999.99 a 999.99.
  SVA DECIMAL (5,2), -- consegue guardar valores entre -999.99 a 999.99.
@@ -72,6 +72,9 @@ SELECT * FROM `Simulação`.`Carros`;
 SELECT * FROM `Simulação`.`Pilotos`;
 SELECT * FROM `Simulação`.`ClassesCarros`;
 SELECT * FROM `Simulação`.`Utilizadores`;
+
+
+SELECT Id FROM `Simulação`.`Campeonatos` WHERE Id = 1;
 
 
 

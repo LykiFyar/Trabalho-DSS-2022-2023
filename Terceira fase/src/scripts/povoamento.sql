@@ -3,59 +3,59 @@ USE `Simulação`;
 -- DELETE FROM `Simulação`.`Campeonatos`;
 -- SELECT * FROM `Simulação`.`Campeonatos`;
 INSERT INTO `Simulação`.`Campeonatos`
-(Id,Nome)
+(Nome)
 VALUES
-(1,'CampeUMnato'),
-(2,'BragaCup'),
-(3,'RallyMinho'),
-(4,'MinhoRace'),
-(5,'CompetitionBraga'),
-(6,'MinhoPrize');
+('CampeUMnato'),
+('BragaCup'),
+('RallyMinho'),
+('MinhoRace'),
+('CompetitionBraga'),
+('MinhoPrize');
 
 
 -- DELETE FROM `Simulação`.`Circuitos`;
 -- SELECT * FROM `Simulação`.`Circuitos`;
 INSERT INTO `Simulação`.`Circuitos`
-(Id,Nome,Clima,Voltas, Comprimento)
+(Nome,Clima,Voltas, Comprimento)
 VALUES
-(1,'Gualtar Campus','Tempo Seco',9,20),
-(2,'Azurém Campus','Chuva',8,18),
-(3,'Sameiro - Bom Jesus','Tempo Seco',10,30),
-(4,'Avenida Central','Chuva',7,16),
-(5,'Parque Rodovia','Tempo Seco',6,12),
-(6,'Palmeira - Estação CF','Chuva',11,40);
+('Gualtar Campus','Tempo Seco',9,20),
+('Azurém Campus','Chuva',8,18),
+('Sameiro - Bom Jesus','Tempo Seco',10,30),
+('Avenida Central','Chuva',7,16),
+('Parque Rodovia','Tempo Seco',6,12),
+('Palmeira - Estação CF','Chuva',11,40);
 
 -- DELETE FROM `Simulação`.`Carros`;
 -- SELECT * FROM `Simulação`.`Carros`;
 INSERT INTO `Simulação`.`Carros`
-(Id,Marca,Modelo)
+(Marca,Modelo)
 VALUES
-(1,'Mazda','Miata'),
-(2,'Toyota','GR86'),
-(3,'Toyota','Supra'),
-(4,'Chevy','Camaro'),
-(5,'Ford','Mustang'),
-(6,'Porsche','Cayman'),
-(7,'Porsche','911'),
-(8,'Ferrari','F8'),
-(9,'Maserati','MC20'),
-(10,'Chevy','Corvette');
+('Mazda','Miata'),
+('Toyota','GR86'),
+('Toyota','Supra'),
+('Chevy','Camaro'),
+('Ford','Mustang'),
+('Porsche','Cayman'),
+('Porsche','911'),
+('Ferrari','F8'),
+('Maserati','MC20'),
+('Chevy','Corvette');
 
 -- DELETE FROM `Simulação`.`Pilotos`;
 -- SELECT * FROM `Simulação`.`Pilotos`;
 INSERT INTO `Simulação`.`Pilotos`
-(Id, Nome, CTS,SVA)
+(Nome, CTS,SVA)
 VALUES
-(1,'Lando',0.6,0.4),
-(2,'Charles',0.4,0.6),
-(3,'Yuki',0.7,0.2),
-(4,'Max',0.4,0.3),
-(5,'Lewis',0.8,0.5),
-(6,'Maria',0.6,0.8),
-(7,'Lucy',0.3,0.2),
-(8,'Kate',0.5,0.7),
-(9,'Juliana',0.8,0.5),
-(10,'Grace',0.6,0.6);
+('Lando',0.6,0.4),
+('Charles',0.4,0.6),
+('Yuki',0.7,0.2),
+('Max',0.4,0.3),
+('Lewis',0.8,0.5),
+('Maria',0.6,0.8),
+('Lucy',0.3,0.2),
+('Kate',0.5,0.7),
+('Juliana',0.8,0.5),
+('Grace',0.6,0.6);
 
 -- DELETE FROM `Simulação`.`ClassesCarros`;
 -- SELECT * FROM `Simulação`.`ClassesCarros`;
