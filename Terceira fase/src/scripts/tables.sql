@@ -74,7 +74,6 @@ SELECT * FROM `Simulação`.`ClassesCarros`;
 SELECT * FROM `Simulação`.`Utilizadores`;
 
 
-SELECT Id FROM `Simulação`.`Campeonatos` WHERE Id = 1;
 
 
 
