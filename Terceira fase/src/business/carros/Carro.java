@@ -17,6 +17,17 @@ public class Carro {
     private Carro(){}
 
     public Carro(String marca, String modelo, int pneu, float pac, MotorICE motorICE, Classe classe){
+        this.id = -1; 
+        this.marca = marca;
+        this.modelo = modelo;
+        this.pneu = pneu;
+        this.pac = pac;
+        this.motorICE = motorICE.clone();
+        this.classe = classe.clone();
+    }
+
+    public Carro(int id, String marca, String modelo, int pneu, float pac, MotorICE motorICE, Classe classe){
+        this.id = id; 
         this.marca = marca;
         this.modelo = modelo;
         this.pneu = pneu;

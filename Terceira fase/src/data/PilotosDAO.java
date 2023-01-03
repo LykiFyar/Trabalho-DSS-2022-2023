@@ -8,17 +8,18 @@ import java.util.Set;
 
 import business.campeonatos.Piloto;
 
-public class PilotosDAO implements Map<String,Piloto> {
+public class PilotosDAO implements Map<Integer,Piloto> {
     private static PilotosDAO singleton = null;
 
     private PilotosDAO() {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             String sql = "CREATE TABLE IF NOT EXISTS `Simulação`.`Pilotos` (" +
-                    "Id INT NOT NULL PRIMARY KEY," +
-                    "Nome varchar(255) NOT NULL" +
-                    "CTS float(2,1) NOT NULL" +
-                    "SVA float(2,1) NOT NULL)";
+                         "Id INT NOT NULL AUTO_INCREMENT," +
+                         "Nome VARCHAR(255) NOT NULL," +
+                         "CTS DECIMAL (5,2)," + 
+                         "SVA DECIMAL (5,2)," +
+                         "PRIMARY KEY (Id));";
             stm.executeUpdate(sql);
         } catch (SQLException e) {
             // Erro a criar tabela...
@@ -36,7 +37,6 @@ public class PilotosDAO implements Map<String,Piloto> {
 
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             stm.executeUpdate("TRUNCATE Pilotos");
@@ -49,7 +49,6 @@ public class PilotosDAO implements Map<String,Piloto> {
 
     @Override
     public boolean containsKey(Object key) {
-        // TODO Auto-generated method stub
         boolean r;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
@@ -66,20 +65,17 @@ public class PilotosDAO implements Map<String,Piloto> {
 
     @Override
     public boolean containsValue(Object value) {
-        // TODO Auto-generated method stub
         Piloto t = (Piloto) value;
         return this.containsKey(t.getId());
     }
 
     @Override
-    public Set<Entry<String, Piloto>> entrySet() {
-        // TODO Auto-generated method stub
+    public Set<Entry<Integer, Piloto>> entrySet() {
         throw new NullPointerException("public Set<Map.Entry<String,Piloto>> entrySet() not implemented!");
     }
 
     @Override
     public Piloto get(Object key) {
-        // TODO Auto-generated method stub
         Piloto p = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
@@ -101,16 +97,14 @@ public class PilotosDAO implements Map<String,Piloto> {
     }
 
     @Override
-    public Set<String> keySet() {
-        // TODO Auto-generated method stub
-        Set<String> res = new HashSet<>();
+    public Set<Integer> keySet() {
+        Set<Integer> res = new HashSet<>();
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs = stm.executeQuery("SELECT Id FROM Pilotos")) {
             while (rs.next()) {
                 int idp = rs.getInt("Id");
-                String p = this.get(idp).getNome();
-                res.add(p);
+                res.add(idp);
             }
         } catch (Exception e) {
             // Database error!
@@ -121,18 +115,17 @@ public class PilotosDAO implements Map<String,Piloto> {
     }
 
     @Override
-    public Piloto put(String key, Piloto p) {
-        // TODO Auto-generated method stub
+    public Piloto put(Integer key, Piloto p) {
         Piloto res = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
 
             // Actualizar a piloto
-            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Pilotos VALUES ('?', '?', '?', '?')")){
-                pstm.setInt(0,p.getId());
+            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Pilotos (Nome,CTS,SVA) VALUES ('?', '?', '?')")){
                 pstm.setString(1,p.getNome());
                 pstm.setFloat(2,p.getCts());
-                pstm.setFloat(3,p.getId());
+                pstm.setFloat(3,p.getSva());
+                pstm.executeUpdate(); // acho que faltava isto.
             }
 
         } catch (SQLException e) {
@@ -144,16 +137,12 @@ public class PilotosDAO implements Map<String,Piloto> {
     }
 
     @Override
-    public void putAll(Map<? extends String, ? extends Piloto> pilotos) {
-        // TODO Auto-generated method stub
-        for(Piloto p : pilotos.values()) {
-            this.put(p.getNome(), p);
-        }
+    public void putAll(Map<? extends Integer, ? extends Piloto> m) {
+        m.keySet().forEach(i -> this.put(i, m.get(i)));
     }
 
     @Override
     public Piloto remove(Object key) {
-        // TODO Auto-generated method stub
         Piloto p = this.get(key);
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()){
@@ -168,7 +157,6 @@ public class PilotosDAO implements Map<String,Piloto> {
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
         int i = 0;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
@@ -187,22 +175,7 @@ public class PilotosDAO implements Map<String,Piloto> {
 
     @Override
     public Collection<Piloto> values() {
-        // TODO Auto-generated method stub
-        Collection<Piloto> res = new HashSet<>();
-        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
-             Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT Id FROM Pilotos")) {
-            while (rs.next()) {
-                int idp = rs.getInt("Id");
-                Piloto p = this.get(idp);
-                res.add(p);
-            }
-        } catch (Exception e) {
-            // Database error!
-            e.printStackTrace();
-            throw new NullPointerException(e.getMessage());
-        }
-        return res;
+        return new HashSet<>(this.keySet().stream().map(key -> this.get(key)).toList());
     }
     
 }

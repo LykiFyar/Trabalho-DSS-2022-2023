@@ -13,6 +13,13 @@ public class Utilizador {
         this.isAdmin = false;
     }
 
+    public Utilizador(String username, String password, int pg, boolean isAdmin){
+        this.username = username;
+        this.password = password;
+        this.pontuacaoGeral = pg;
+        this.isAdmin = isAdmin;
+    }
+
     private Utilizador(){}
 
     /**
@@ -60,7 +67,7 @@ public class Utilizador {
     /**
      * @return boolean return the isAdmin
      */
-    public boolean isIsAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
     }
 

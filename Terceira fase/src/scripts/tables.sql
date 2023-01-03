@@ -27,6 +27,8 @@ CREATE TABLE IF NOT EXISTS `Simulação`.`Carros` (
  Id INT NOT NULL AUTO_INCREMENT,
  Marca VARCHAR(255) NOT NULL,
  Modelo VARCHAR(255) NOT NULL,
+ Classe VARCHAR(255) NOT NULL,
+ FOREIGN KEY (Classe) REFERENCES ClassesCarros(Id),
  PRIMARY KEY (Id));
 
 -- -------------------------------------
@@ -38,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `Simulação`.`Pilotos` (
  Nome VARCHAR(255) NOT NULL,
  CTS DECIMAL (5,2), -- consegue guardar valores entre -999.99 a 999.99.
  SVA DECIMAL (5,2), -- consegue guardar valores entre -999.99 a 999.99.
+ Classe VARCHAR(255) NOT NULL,
  PRIMARY KEY (Id));
 
 -- -------------------------------------

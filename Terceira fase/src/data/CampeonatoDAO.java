@@ -2,6 +2,7 @@ package data;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,11 +11,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
-
 import business.campeonatos.Campeonato;
 
-public class CampeonatoDAO implements Map<String,Campeonato>{
+public class CampeonatoDAO implements Map<Integer,Campeonato>{
 
     private static CampeonatoDAO singleton = null;
 
@@ -22,8 +21,9 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             String sql = "CREATE TABLE IF NOT EXISTS `Simulação`.`Campeonatos` (" +
-                    "Id INT NOT NULL PRIMARY KEY," +
-                    "Nome varchar(255) NOT NULL)";
+                        "Id INT NOT NULL AUTO_INCREMENT," +
+                        "Nome VARCHAR(255) NOT NULL," +
+                        "PRIMARY KEY (Id));";
             stm.executeUpdate(sql);
         } catch (SQLException e) {
             // Erro a criar tabela...
@@ -59,8 +59,8 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
             Statement s = conn.createStatement();
             ResultSet r=
-                        s.executeQuery("SELECT Id FROM `Simulação`.`Campeonatos` WHERE Id ='+key+'")){
-                            b=r.next();
+                        s.executeQuery("SELECT Id FROM `Simulação`.`Campeonatos` WHERE Id ='" + key + "'")){
+            b = r.next();
         }catch (SQLException e){
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
@@ -76,15 +76,24 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
     }
 
     @Override
-    public Set<Entry<String, Campeonato>> entrySet() {
-        // TODO Auto-generated method stub
-        return null;
+    public Set<Entry<Integer, Campeonato>> entrySet() {
+        throw new RuntimeException("public Set<Entry<Integer, Campeonato>> entrySet() not implemented");
     }
 
     @Override
     public Campeonato get(Object key) {
-        // TODO Auto-generated method stub
-        return null;
+        Campeonato r = null;
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             Statement stm = conn.createStatement();
+             ResultSet rs =
+                     stm.executeQuery("SELECT * FROM `Simulação`.`Campeonatos` WHERE Id='"+key+"'")) {
+            r = new Campeonato(rs.getString("Nome"));
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return r;
     }
 
     @Override
@@ -92,24 +101,27 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
         return this.size() == 0;
     }
 
-    @Override
-    public Map< keySet() {
-           // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
-    public Campeonato put(String arg0, Campeonato arg1) {
-      // TODO Auto-generated method stub
-        return null;
-    }
-
-
-    @Override
-    public void putAll(Map<? extends String, ? extends Campeonato> m) {
-        for(Campeonato c : m.values()) {
-            this.put(c.getNome(), c);
+    public Campeonato put(Integer key, Campeonato value) {
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             Statement stm = conn.createStatement()) {
+            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Campeonatos (Nome) VALUES ('?')")){
+                pstm.setString(1, value.getNome());
+                pstm.executeUpdate(); 
+            }
+        }catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
         }
+        return value;
+    }
+
+
+    @Override
+    public void putAll(Map<? extends Integer, ? extends Campeonato> m) {
+        m.keySet().forEach(i -> this.put(i, m.get(i)));
     }
 
     @Override
@@ -144,14 +156,21 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
 
     @Override
     public Collection<Campeonato> values() {
-        Collection<Campeonato> res = new HashSet<>();
+        return new HashSet<>(this.keySet().stream().map(key -> this.get(key)).toList());
+    }
+
+    @Override
+    public Set<Integer> keySet() {
+        Set<Integer> res = new HashSet<>();
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT Id FROM `Simulação`.`Campeonatos`")) {
+             ResultSet rs = stm.executeQuery("SELECT Id FROM Campeonatos")) {
             while (rs.next()) {
-               res.add(this.get(rs.getInt("Id")));
+                int idc = rs.getInt("Id");
+                res.add(idc);
             }
         } catch (Exception e) {
+            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }

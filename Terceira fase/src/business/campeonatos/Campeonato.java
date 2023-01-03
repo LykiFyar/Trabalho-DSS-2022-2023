@@ -40,6 +40,26 @@ public class Campeonato {
         this.classificacaoH = new HashMap<String,Integer>();
     }
 
+    public Campeonato(String nome){
+        this.nome = nome;
+        /*
+        Jogador j1 = new Jogador(new Piloto("Ham", 0.5F, 0.5F),new Carro("Mercedes","AMG",0,0.5F,new MotorICE(6000,1000,1),new C1()));
+        Jogador j2 = new Jogador(new Piloto("Max", 0.5F, 0.5F),new Carro("Red Bull","RB-18",0,0.5F,new MotorICE(6000,1000,1),new C1()));
+        List<Jogador> jogadores= new ArrayList<>();
+        jogadores.add(j1); jogadores.add(j2);
+        this.jogadores = jogadores;
+         */
+        this.jogadores = new ArrayList<>();
+        Circuito c1 = new Circuito("C1",3,true,10);
+        Circuito c2 = new Circuito("C2",3,true,20);
+        Circuito c3 = new Circuito("C3",3,false,30);
+        List<Circuito> circuitos = new ArrayList<>();
+        circuitos.add(c1); circuitos.add(c2); circuitos.add(c3);
+        this.circuitos = circuitos;
+        this.classificacao = new HashMap<String,Integer>();
+        this.classificacaoH = new HashMap<String,Integer>();
+    }
+
     public Campeonato(String name, List<Circuito> circuitos){
         this.nome = name;
         this.circuitos = circuitos; // PODE TER QUE SER ALTERADO
