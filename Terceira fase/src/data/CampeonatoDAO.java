@@ -42,9 +42,15 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
     //Método que elimina todas as entradas na tabela.
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        
-    }
+          try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+          Statement stm = conn.createStatement()) {
+         stm.executeUpdate("TRUNCATE `Simulação`.`Campeonatos`");
+     } catch (SQLException e) {
+         // Database error!
+         e.printStackTrace();
+         throw new NullPointerException(e.getMessage());
+     }
+ }
 
     //Método que devolve se um dado id de um Campeonato se encontra registado na Base de dados
     @Override
@@ -53,7 +59,7 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
             Statement s = conn.createStatement();
             ResultSet r=
-                        s.executeQuery("SELECT Nome FROM `Simulação`.`Campeonatos` WHERE Nome ='"+key.toString()+"'")){
+                        s.executeQuery("SELECT Id FROM `Simulação`.`Campeonatos` WHERE Id ='+key+'")){
                             b=r.next();
         }catch (SQLException e){
             e.printStackTrace();
@@ -87,16 +93,17 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
     }
 
     @Override
-    public Set<String> keySet() {
-        // TODO Auto-generated method stub
+    public Map< keySet() {
+           // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Campeonato put(String arg0, Campeonato arg1) {
-        // TODO Auto-generated method stub
+      // TODO Auto-generated method stub
         return null;
     }
+
 
     @Override
     public void putAll(Map<? extends String, ? extends Campeonato> m) {
@@ -110,7 +117,7 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
         Campeonato c = this.get(key);
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement s = conn.createStatement()) {
-            s.executeUpdate("DELETE FROM `Simulação`.`Campeonatos` WHERE Nome ='"+key+"'");
+            s.executeUpdate("DELETE FROM `Simulação`.`Campeonatos` WHERE Id ='"+key+"'");
         } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
@@ -140,11 +147,9 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
         Collection<Campeonato> res = new HashSet<>();
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT Nome FROM `Simulação`.`Campeonatos`")) {
+             ResultSet rs = stm.executeQuery("SELECT Id FROM `Simulação`.`Campeonatos`")) {
             while (rs.next()) {
-                String nome = rs.getString("Nome");
-                Campeonato c = this.get(nome);
-                res.add(c);
+               res.add(this.get(rs.getInt("Id")));
             }
         } catch (Exception e) {
             e.printStackTrace();

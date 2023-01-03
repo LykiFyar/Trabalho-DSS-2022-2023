@@ -13,6 +13,7 @@ import static business.util.printMapSortedByValue;
 import static business.util.sortMap;
 
 public class Campeonato {
+    private int id;
     private String nome;
     private List<Circuito> circuitos;
     private List<Jogador> jogadores;
@@ -186,8 +187,12 @@ public class Campeonato {
         return this.nome;
     }
 
-    public List<Circuito> getCircuitos(){
-        return this.circuitos;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     // TODO: Completar esta classe

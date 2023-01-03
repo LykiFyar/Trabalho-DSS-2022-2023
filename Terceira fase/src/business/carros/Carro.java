@@ -6,6 +6,7 @@ import business.campeonatos.Piloto;
 import java.util.Map;
 
 public class Carro {
+    private int id;
     private String marca;
     private String modelo;
     private int pneu; // 0-Macio, 1-duro, 2-chuva
@@ -22,6 +23,21 @@ public class Carro {
         this.pac = pac;
         this.motorICE = motorICE.clone();
         this.classe = classe.clone();
+    }
+
+    /**
+     * @return String return the ID
+     */
+
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

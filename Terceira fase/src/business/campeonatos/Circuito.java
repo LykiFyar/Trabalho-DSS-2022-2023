@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Circuito {
+    private int id;
     private String nome;
     private int numVoltas;
     private boolean clima; // true-chove | false-seco
@@ -29,6 +30,14 @@ public class Circuito {
         this.setores = setores;
         //this.participantes = null;
         this.dnf = new HashMap<Jogador,Integer>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -129,6 +138,7 @@ public class Circuito {
         this.dnf = new HashMap<>();
         this.participantes = new ArrayList<>();
     }
+
 
     // TODO: Completar esta classe
 

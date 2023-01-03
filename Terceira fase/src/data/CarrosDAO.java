@@ -55,12 +55,28 @@ public class CarrosDAO implements Set<Carro> {
         return this.size() == 0;
     }
 
+
+    public boolean containsKey(Object key) {
+        boolean r;
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             Statement stm = conn.createStatement();
+             ResultSet rs =
+                     stm.executeQuery("SELECT Id FROM `Simulação`.`Carros` WHERE Id='"+key+"'")) {
+            r = rs.next();
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return r;
+    }
+
     //Método que devolve se uma dada um dado carro existe na base de dados
-    /*@Override
+   // @Override
     public boolean containsValue(Object value) {
         Carro c = (Carro) value;
         return this.containsKey(c.getId());
-    }*/
+    }
 
 
     @Override
