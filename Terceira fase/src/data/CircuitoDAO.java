@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.sql.*;
+import java.util.stream.Collectors;
 
 import business.campeonatos.Circuito;
 
@@ -178,7 +179,7 @@ public class CircuitoDAO implements Map<Integer,Circuito>{
 
     @Override
     public Collection<Circuito> values() {
-        return new HashSet<>(this.keySet().stream().map(key -> this.get(key)).toList());
+        return (this.keySet().stream().map(this::get).collect(Collectors.toList()));
     }
     
 }

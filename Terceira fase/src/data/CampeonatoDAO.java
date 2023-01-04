@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import business.campeonatos.Campeonato;
 
@@ -156,7 +157,7 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>{
 
     @Override
     public Collection<Campeonato> values() {
-        return new HashSet<>(this.keySet().stream().map(key -> this.get(key)).toList());
+        return this.keySet().stream().map(this::get).collect(Collectors.toList());
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.sql.*;
+import java.util.stream.Collectors;
 
 import business.carros.Classe;
 import business.carros.classes.*;
@@ -184,7 +185,7 @@ public class ClassesCarrosDAO implements Map<String,Classe>{
 
     @Override
     public Collection<Classe> values() {
-        return new HashSet<>(this.keySet().stream().map(key -> this.get(key)).toList());
+        return (this.keySet().stream().map(this::get).collect(Collectors.toList()));
     }
 
     @Override

@@ -192,7 +192,7 @@ public class F1ManagerUI{
             scin.nextLine(); //consumir o \n
             String piloto = pilotos.get(p-1);
 
-            if (this.campeonatos.addJogador(camp,nome,this.utilizadores.getUtilizador(username),this.campeonatos.getPiloto(piloto),this.carros.getCarro(c-1))){
+            if (this.campeonatos.addJogador(camp,nome,this.utilizadores.getUtilizador(username),this.campeonatos.getPiloto(piloto),this.carros.getCarro(c))){
                 System.out.println("Jogador adicionado com sucesso!");
                 break;
             }

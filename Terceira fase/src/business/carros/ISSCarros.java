@@ -1,9 +1,9 @@
 package business.carros;
 
 public interface ISSCarros {
-    public boolean validaCarro(Carro carro);
+    public boolean validaCarro(int id);
 
-    public void addCarro(Carro carro);
+    public void addCarro(int id,Carro carro);
 
     public boolean validarCilindrada(int cilindrada, Classe classe);
 

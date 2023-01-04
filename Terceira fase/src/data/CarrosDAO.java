@@ -2,6 +2,7 @@ package data;
 
 import java.sql.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import business.carros.Carro;
 import business.carros.Classe;
@@ -145,7 +146,7 @@ public class CarrosDAO implements Map<Integer,Carro> {
     }
     @Override
     public Collection<Carro> values() {
-        return new HashSet<>(this.keySet().stream().map(key -> this.get(key)).toList());
+        return (this.keySet().stream().map(this::get).collect(Collectors.toList()));
     }
 
     @Override

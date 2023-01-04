@@ -15,12 +15,12 @@ public class SSCampeonatosFacade implements ISSCampeonados{
     private Map<String,Campeonato> campeonatos;    
 
     public SSCampeonatosFacade(){
-        /*
+
         this.pilotos = PilotosDAO.getInstance();
         this.campeonatos = CampeonatoDAO.getInstance();
         this.circuitos = CircuitoDAO.getInstance();
-         */
 
+        /*
         this.pilotos = new HashMap<>();
         this.pilotos.put("Ham", new Piloto(0,"Ham",0.5f,0.5f));
         this.pilotos.put("Max", new Piloto(1,"Max",0.5f,0.5f));
@@ -32,6 +32,7 @@ public class SSCampeonatosFacade implements ISSCampeonados{
 
         this.campeonatos = new HashMap<>();
         this.campeonatos.put("Campeonato",new Campeonato());
+         */
     }
 
     public Map<String, Piloto> getPilotos() {
