@@ -54,7 +54,7 @@ public class UtilizadoresDAO implements Map<String,Utilizador> {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs =
-                     stm.executeQuery("SELECT Id FROM `Simulação`.`Utilizadores` WHERE Id='"+key+"'")) {
+                     stm.executeQuery("SELECT user FROM `Simulação`.`Utilizadores` WHERE user='"+key+"'")) {
             r = rs.next();
         } catch (SQLException e) {
             // Database error!
@@ -72,7 +72,7 @@ public class UtilizadoresDAO implements Map<String,Utilizador> {
 
     @Override
     public Set<Entry<String, Utilizador>> entrySet() {
-        throw new RuntimeException("public Set<Entry<String, Utilizador>> entrySet() not implemented");
+        return this.keySet().stream().map(k -> Map.entry(k, this.get(k))).collect(Collectors.toSet());
     }
 
     @Override
@@ -81,8 +81,8 @@ public class UtilizadoresDAO implements Map<String,Utilizador> {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs =
-                     stm.executeQuery("SELECT * FROM `Simulação`.`Utilizadores` WHERE Id='"+key+"'")) {
-            r = new Utilizador(rs.getString("user"), rs.getString("pass"), rs.getInt("pontuaçãoGeral"), rs.getInt("isAdmin") == 1 ? true : false);
+                     stm.executeQuery("SELECT * FROM Utilizadores WHERE user='"+key+"'")) {
+            r = rs.next() ? new Utilizador(rs.getString("user"), rs.getString("pass"), rs.getInt("pontuaçãoGeral"), rs.getInt("isAdmin") == 1 ? true : false) : null;
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -175,6 +175,6 @@ public class UtilizadoresDAO implements Map<String,Utilizador> {
 
     @Override
     public Collection<Utilizador> values() {
-        return (this.keySet().stream().map(this::get).collect(Collectors.toList()));
+        return this.keySet().stream().map(this::get).collect(Collectors.toList());
     }
 }

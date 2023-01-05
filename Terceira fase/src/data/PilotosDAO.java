@@ -71,7 +71,7 @@ public class PilotosDAO implements Map<String,Piloto> {
 
     @Override
     public Set<Entry<String, Piloto>> entrySet() {
-        throw new NullPointerException("public Set<Map.Entry<String,Piloto>> entrySet() not implemented!");
+        return this.keySet().stream().map(k -> Map.entry(k, this.get(k))).collect(Collectors.toSet());
     }
 
     @Override

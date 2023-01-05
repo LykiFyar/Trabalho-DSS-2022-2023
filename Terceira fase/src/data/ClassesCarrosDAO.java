@@ -87,22 +87,25 @@ public class ClassesCarrosDAO implements Map<String,Classe>{
              Statement stm = conn.createStatement();
              ResultSet rs =
                      stm.executeQuery("SELECT * FROM `Simulação`.`ClassesCarros` WHERE Id='"+key+"'")) {
-            if(k.equals("SC")){
-                r = new SC(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0);
-            }else if(k.equals("C1")){
-                r = new C1(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0);
-            }else if(k.equals("C2")){
-                r = new C2(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0);
-            }else if(k.equals("GT")){
-                r = new GT(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0, 0);
-            }else if(k.equals("C1H")){
-                r = new C1H(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0, 0);
-            }else if(k.equals("C2H")){
-                r = new C2H(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0, 0);
-            }else if(k.equals("GTH")){
-                r = new GTH(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0, 0, 0);
-            }else{
-                throw new RuntimeException("(Linha 104 -> ClassesCarrosDAO.java) Função get do ClassesCarrosDAO: key not in {SC,C1,C2,GT,C1H,C2H,GTH}");
+            if(rs.next()) {
+                
+                if(k.equals("SC")){
+                    r = new SC(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0);
+                }else if(k.equals("C1")){
+                    r = new C1(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0);
+                }else if(k.equals("C2")){
+                    r = new C2(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0);
+                }else if(k.equals("GT")){
+                    r = new GT(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0, 0);
+                }else if(k.equals("C1H")){
+                    r = new C1H(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0, 0);
+                }else if(k.equals("C2H")){
+                    r = new C2H(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0, 0);
+                }else if(k.equals("GTH")){
+                    r = new GTH(rs.getInt("minCilindrada"), rs.getInt("maxCilindrada"), 0, 0, 0);
+                }else{
+                    throw new RuntimeException("(ClassesCarrosDAO.java) Função get do ClassesCarrosDAO: key not in {SC,C1,C2,GT,C1H,C2H,GTH}");
+                }
             }
         } catch (SQLException e) {
             // Database error!
@@ -190,7 +193,7 @@ public class ClassesCarrosDAO implements Map<String,Classe>{
 
     @Override
     public Set<Entry<String, Classe>> entrySet() {
-        throw new RuntimeException("public Set<Entry<String, Classe>>  entrySet() not implemented");
+        return this.keySet().stream().map(k -> Map.entry(k, this.get(k))).collect(Collectors.toSet());
     }
     
 }

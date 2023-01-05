@@ -23,6 +23,7 @@ public class CarrosDAO implements Map<Integer,Carro> {
                          "FOREIGN KEY (Classe) REFERENCES ClassesCarros(Id)," +
                          "PRIMARY KEY (Id));";
             stm.executeUpdate(sql);
+            CarrosDAO.classes = ClassesCarrosDAO.getInstance();
 
         } catch (SQLException e) { // erro ao criarmos a tabela
             e.printStackTrace();
@@ -33,7 +34,6 @@ public class CarrosDAO implements Map<Integer,Carro> {
     //Método que devolve a instância única desta classe no padrão Singleton.
     public static CarrosDAO getInstance(){
         if(CarrosDAO.singleton==null){
-            CarrosDAO.classes = ClassesCarrosDAO.getInstance();
             CarrosDAO.singleton = new CarrosDAO();
         }
         return CarrosDAO.singleton;
@@ -95,8 +95,10 @@ public class CarrosDAO implements Map<Integer,Carro> {
              ResultSet rs =
                      stm.executeQuery("SELECT * FROM `Simulação`.`Carros` WHERE Id='"+key+"'")) {
             // TODO: ATENÇÃO: VER O QUE FAZER COM OS VALORES: PNEU, PAC, MOTORICE E CLASSE
-            Classe c = classes.get(rs.getString("Classe"));
-            r = new Carro(rs.getInt("Id"), rs.getString("Marca"), rs.getString("Modelo"), 0, 0, null, c);
+            if(rs.next()){
+                Classe c = classes.get(rs.getString("Classe"));
+                r = new Carro(rs.getInt("Id"), rs.getString("Marca"), rs.getString("Modelo"), 0, 0, null, c);
+            }
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -146,12 +148,12 @@ public class CarrosDAO implements Map<Integer,Carro> {
     }
     @Override
     public Collection<Carro> values() {
-        return (this.keySet().stream().map(this::get).collect(Collectors.toList()));
+        return this.keySet().stream().map(this::get).collect(Collectors.toList());
     }
 
     @Override
     public Set<Entry<Integer, Carro>> entrySet() {
-        throw new RuntimeException("public Set<Entry<Integer, Carro>> entrySet() not implemented");
+        return this.keySet().stream().map(k -> Map.entry(k, this.get(k))).collect(Collectors.toSet());
     }
 
     @Override

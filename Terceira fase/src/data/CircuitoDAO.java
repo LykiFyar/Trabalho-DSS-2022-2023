@@ -73,7 +73,7 @@ public class CircuitoDAO implements Map<String,Circuito>{
 
     @Override
     public Set<Entry<String, Circuito>> entrySet() {
-        throw new RuntimeException("public  Set<Entry<String, Circuito>>entrySet() not implemented");
+        return this.keySet().stream().map(k -> Map.entry(k, this.get(k))).collect(Collectors.toSet());
     }
 
     @Override
@@ -83,9 +83,9 @@ public class CircuitoDAO implements Map<String,Circuito>{
              Statement stm = conn.createStatement();
              ResultSet rs =
                      stm.executeQuery("SELECT * FROM `Simulação`.`Circuitos` WHERE Nome='"+key+"'")) {
-            r = new Circuito(rs.getString("Nome"),rs.getInt("Voltas"), 
+            r = rs.next() ? new Circuito(rs.getString("Nome"),rs.getInt("Voltas"), 
                              rs.getString("Clima").equals("Chuva"), 
-                             rs.getInt("Comprimento"));
+                             rs.getInt("Comprimento")) : null;
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();

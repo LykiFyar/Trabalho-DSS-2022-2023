@@ -6,5 +6,5 @@ public class DAOconfig {
     private static final String DATABASE = "Simulação";         
     //private static final String DRIVER = "jdbc:mariadb";        // Usar para MariaDB
     private static final String DRIVER = "jdbc:mysql";        // Usar para MySQL
-    static final String URL = DRIVER+"://localhost:3307/"+DATABASE;
+    static final String URL = DRIVER+"://localhost:3306/"+DATABASE; // Acho que a porta default do mysql é 3306
 }

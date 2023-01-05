@@ -27,19 +27,19 @@ VALUES
 
 -- DELETE FROM `Simulação`.`Carros`;
 -- SELECT * FROM `Simulação`.`Carros`;
-INSERT INTO `Simulação`.`Carros`
-(Marca,Modelo)
+INSERT INTO `Simulação`.`Carros` -- Alterar
+(Marca,Modelo,Classe)
 VALUES
-('Mazda','Miata'),
-('Toyota','GR86'),
-('Toyota','Supra'),
-('Chevy','Camaro'),
-('Ford','Mustang'),
-('Porsche','Cayman'),
-('Porsche','911'),
-('Ferrari','F8'),
-('Maserati','MC20'),
-('Chevy','Corvette');
+('Mazda','Miata','C1'),
+('Toyota','GR86','C2'),
+('Toyota','Supra','GT'),
+('Chevy','Camaro','SC'),
+('Ford','Mustang','C1'),
+('Porsche','Cayman','C2'),
+('Porsche','911','GT'),
+('Ferrari','F8','SC'),
+('Maserati','MC20','C1'),
+('Chevy','Corvette','C2');
 
 -- DELETE FROM `Simulação`.`Pilotos`;
 -- SELECT * FROM `Simulação`.`Pilotos`;
@@ -65,7 +65,7 @@ VALUES
 ('C1',6000,6000),
 ('C2',3000,5000),
 ('GT',2000,4000),
-('ST',2500,2500);
+('SC',2500,2500);
 
 -- DELETE FROM `Simulação`.`Utilizadores`;
 -- SELECT * FROM `Simulação`.`Utilizadores`;

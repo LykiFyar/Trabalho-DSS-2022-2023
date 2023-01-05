@@ -2,7 +2,7 @@ package business.carros;
 
 import business.campeonatos.Circuito;
 import business.campeonatos.Piloto;
-
+import business.carros.classes.*;
 import java.util.Map;
 
 public class Carro {
@@ -22,8 +22,8 @@ public class Carro {
         this.modelo = modelo;
         this.pneu = pneu;
         this.pac = pac;
-        this.motorICE = motorICE.clone();
-        this.classe = classe.clone();
+        this.motorICE = motorICE != null ? motorICE.clone() : new MotorICE(6000, 10000, 1);
+        this.classe = classe != null ? classe.clone() : new C1(6000,6000,95);
     }
 
     public Carro(int id, String marca, String modelo, int pneu, float pac, MotorICE motorICE, Classe classe){
@@ -32,8 +32,8 @@ public class Carro {
         this.modelo = modelo;
         this.pneu = pneu;
         this.pac = pac;
-        this.motorICE = motorICE.clone();
-        this.classe = classe.clone();
+        this.motorICE = motorICE != null ? motorICE.clone() : new MotorICE(6000, 10000, 1);
+        this.classe = classe != null ? classe.clone() : new C1(6000,6000,95);
     }
 
     /**

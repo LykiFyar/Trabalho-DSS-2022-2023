@@ -77,7 +77,7 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
 
     @Override
     public Set<Entry<String, Campeonato>> entrySet() {
-        throw new RuntimeException("public Set<Entry<String, Campeonato>> entrySet() not implemented");
+        return this.keySet().stream().map(k -> Map.entry(k, this.get(k))).collect(Collectors.toSet());
     }
 
     @Override
@@ -87,7 +87,7 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
              Statement stm = conn.createStatement();
              ResultSet rs =
                      stm.executeQuery("SELECT * FROM `Simulação`.`Campeonatos` WHERE Nome='"+key+"';")) {
-            r = new Campeonato(rs.getString("Nome"));
+            r = rs.next() ? new Campeonato(rs.getString("Nome")) : null;
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
