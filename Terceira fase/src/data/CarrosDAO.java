@@ -33,8 +33,8 @@ public class CarrosDAO implements Map<Integer,Carro> {
     //Método que devolve a instância única desta classe no padrão Singleton.
     public static CarrosDAO getInstance(){
         if(CarrosDAO.singleton==null){
-            CarrosDAO.singleton = new CarrosDAO();
             CarrosDAO.classes = ClassesCarrosDAO.getInstance();
+            CarrosDAO.singleton = new CarrosDAO();
         }
         return CarrosDAO.singleton;
     }
