@@ -19,7 +19,6 @@ public class PilotosDAO implements Map<String,Piloto> {
                          "Nome VARCHAR(255) NOT NULL," +
                          "CTS DECIMAL (5,2), " +
                          "SVA DECIMAL (5,2), " +
-                         "Classe VARCHAR(255) NOT NULL," +
                          "PRIMARY KEY (Nome));";
             stm.executeUpdate(sql);
         } catch (SQLException e) {

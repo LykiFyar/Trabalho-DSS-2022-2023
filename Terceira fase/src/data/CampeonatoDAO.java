@@ -86,7 +86,7 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs =
-                     stm.executeQuery("SELECT * FROM `Simulação`.`Campeonatos` WHERE Nome='"+key+"'")) {
+                     stm.executeQuery("SELECT * FROM `Simulação`.`Campeonatos` WHERE Nome='"+key+"';")) {
             r = new Campeonato(rs.getString("Nome"));
         } catch (SQLException e) {
             // Database error!
