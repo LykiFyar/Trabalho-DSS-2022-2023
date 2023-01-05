@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Circuito {
-    private int id;
     private String nome;
     private int numVoltas;
     private boolean clima; // true-chove | false-seco
@@ -18,7 +17,6 @@ public class Circuito {
     private Circuito(){}
 
     public Circuito(String nome, int numVoltas, boolean clima, int comprimento){
-        this.id = -1;
         this.nome = nome;
         this.numVoltas = numVoltas;
         this.clima = clima;
@@ -33,29 +31,7 @@ public class Circuito {
         this.dnf = new HashMap<Jogador,Integer>();
     }
 
-    public Circuito(int id, String nome, int numVoltas, boolean clima, int comprimento){
-        this.id = id;
-        this.nome = nome;
-        this.numVoltas = numVoltas;
-        this.clima = clima;
-        this.comprimento = comprimento;
-        Setor s1 = new Setor(0,"reta");
-        Setor s2 = new Setor(1,"chicane");
-        Setor s3 = new Setor(2,"curva");
-        List<Setor> setores = new ArrayList<>();
-        setores.add(s1); setores.add(s2); setores.add(s3);
-        this.setores = setores;
-        //this.participantes = null;
-        this.dnf = new HashMap<Jogador,Integer>();
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;

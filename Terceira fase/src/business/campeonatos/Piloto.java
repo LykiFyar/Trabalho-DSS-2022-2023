@@ -3,27 +3,18 @@ package business.campeonatos;
 import java.util.Random;
 
 public class Piloto {
-    private int id;
     private String nome;
     private float cts; // perto de 0 é melhor em chuva e perto de 1 melhor em tempo seco
     private float sva; // perto de 0 o piloto conduz de forma mais segura e perto de 1 ultrapassa mais facilmente
 
     private Piloto(){}
 
-    public Piloto(int id, String nome, float cts, float sva){
-        this.id = id;
+    public Piloto(String nome, float cts, float sva){
         this.nome = nome;
         this.cts = cts;
         this.sva = sva;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * @return String return the nome
@@ -68,7 +59,7 @@ public class Piloto {
     }
 
     public Piloto clone(){
-        return new Piloto(id, nome, cts, sva);
+        return new Piloto(nome, cts, sva);
     }
 
     public int hashCode(){

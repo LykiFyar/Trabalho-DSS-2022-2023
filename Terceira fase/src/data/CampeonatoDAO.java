@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 import business.campeonatos.Campeonato;
 
-public class CampeonatoDAO implements Map<Integer,Campeonato>{
+public class CampeonatoDAO implements Map<String,Campeonato>{
 
     private static CampeonatoDAO singleton = null;
 
@@ -22,9 +22,8 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>{
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             String sql = "CREATE TABLE IF NOT EXISTS `Simulação`.`Campeonatos` (" +
-                        "Id INT NOT NULL AUTO_INCREMENT," +
                         "Nome VARCHAR(255) NOT NULL," +
-                        "PRIMARY KEY (Id));";
+                        "PRIMARY KEY (Nome));";
             stm.executeUpdate(sql);
         } catch (SQLException e) {
             // Erro a criar tabela...
@@ -60,7 +59,7 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>{
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
             Statement s = conn.createStatement();
             ResultSet r=
-                        s.executeQuery("SELECT Id FROM `Simulação`.`Campeonatos` WHERE Id ='" + key + "'")){
+                        s.executeQuery("SELECT Nome FROM `Simulação`.`Campeonatos` WHERE Nome ='" + key + "'")){
             b = r.next();
         }catch (SQLException e){
             e.printStackTrace();
@@ -77,8 +76,8 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>{
     }
 
     @Override
-    public Set<Entry<Integer, Campeonato>> entrySet() {
-        throw new RuntimeException("public Set<Entry<Integer, Campeonato>> entrySet() not implemented");
+    public Set<Entry<String, Campeonato>> entrySet() {
+        throw new RuntimeException("public Set<Entry<String, Campeonato>> entrySet() not implemented");
     }
 
     @Override
@@ -87,7 +86,7 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>{
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs =
-                     stm.executeQuery("SELECT * FROM `Simulação`.`Campeonatos` WHERE Id='"+key+"'")) {
+                     stm.executeQuery("SELECT * FROM `Simulação`.`Campeonatos` WHERE Nome='"+key+"'")) {
             r = new Campeonato(rs.getString("Nome"));
         } catch (SQLException e) {
             // Database error!
@@ -104,7 +103,7 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>{
 
 
     @Override
-    public Campeonato put(Integer key, Campeonato value) {
+    public Campeonato put(String key, Campeonato value) {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Campeonatos (Nome) VALUES ('?')")){
@@ -121,7 +120,7 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>{
 
 
     @Override
-    public void putAll(Map<? extends Integer, ? extends Campeonato> m) {
+    public void putAll(Map<? extends String, ? extends Campeonato> m) {
         m.keySet().forEach(i -> this.put(i, m.get(i)));
     }
 
@@ -130,7 +129,7 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>{
         Campeonato c = this.get(key);
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement s = conn.createStatement()) {
-            s.executeUpdate("DELETE FROM `Simulação`.`Campeonatos` WHERE Id ='"+key+"'");
+            s.executeUpdate("DELETE FROM `Simulação`.`Campeonatos` WHERE Nome ='"+key+"'");
         } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
@@ -161,13 +160,13 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>{
     }
 
     @Override
-    public Set<Integer> keySet() {
-        Set<Integer> res = new HashSet<>();
+    public Set<String> keySet() {
+        Set<String> res = new HashSet<>();
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT Id FROM Campeonatos")) {
+             ResultSet rs = stm.executeQuery("SELECT Nome FROM Campeonatos")) {
             while (rs.next()) {
-                int idc = rs.getInt("Id");
+                String idc = rs.getString("Nome");
                 res.add(idc);
             }
         } catch (Exception e) {

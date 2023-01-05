@@ -4,20 +4,18 @@ USE Simulação;
 -- CREATES THE "CAMPEONATOS" TABLE
 -- -------------------------------------
 CREATE TABLE IF NOT EXISTS `Simulação`.`Campeonatos` (
- Id INT NOT NULL AUTO_INCREMENT,
  Nome VARCHAR(255) NOT NULL,
- PRIMARY KEY (Id));
+ PRIMARY KEY (Nome));
 
 -- -------------------------------------
 -- CREATES THE "CIRCUITOS" TABLE
 -- -------------------------------------
 CREATE TABLE IF NOT EXISTS `Simulação`.`Circuitos` (
- Id INT NOT NULL AUTO_INCREMENT,
  Nome VARCHAR(255) NOT NULL,
  Clima VARCHAR(255) NOT NULL,
  Voltas INT NOT NULL,
  Comprimento INT NOT NULL,
- PRIMARY KEY (Id));
+ PRIMARY KEY (Nome));
 
 -- -------------------------------------
 -- CREATES THE "CARROS" TABLE
@@ -36,12 +34,10 @@ CREATE TABLE IF NOT EXISTS `Simulação`.`Carros` (
 -- -------------------------------------
 
 CREATE TABLE IF NOT EXISTS `Simulação`.`Pilotos` (
- Id INT NOT NULL AUTO_INCREMENT,
  Nome VARCHAR(255) NOT NULL,
  CTS DECIMAL (5,2), -- consegue guardar valores entre -999.99 a 999.99.
  SVA DECIMAL (5,2), -- consegue guardar valores entre -999.99 a 999.99.
- Classe VARCHAR(255) NOT NULL,
- PRIMARY KEY (Id));
+ PRIMARY KEY (Nome));
 
 -- -------------------------------------
 -- CREATES THE "CLASSESCARROS" TABLE

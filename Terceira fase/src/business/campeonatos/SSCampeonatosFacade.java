@@ -53,8 +53,11 @@ public class SSCampeonatosFacade implements ISSCampeonados{
     }
 
     @Override
-    public void addPiloto(int id, String name, float cts, float sva) {
-        Piloto newPiloto = new Piloto(id, name, cts, sva);
+    public void addPiloto(String name, float cts, float sva) {
+        Piloto newPiloto = new Piloto( name, cts, sva);
+        if(this.pilotos.containsKey(name)){ // se o piloto já existir na BD, deve ser actualizado
+            this.pilotos.remove(name);
+        }
         this.pilotos.put(name, newPiloto);
     }
 

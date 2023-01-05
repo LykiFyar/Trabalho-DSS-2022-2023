@@ -9,18 +9,18 @@ import java.util.stream.Collectors;
 
 import business.campeonatos.Piloto;
 
-public class PilotosDAO implements Map<Integer,Piloto> {
+public class PilotosDAO implements Map<String,Piloto> {
     private static PilotosDAO singleton = null;
 
     private PilotosDAO() {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             String sql = "CREATE TABLE IF NOT EXISTS `Simulação`.`Pilotos` (" +
-                         "Id INT NOT NULL AUTO_INCREMENT," +
                          "Nome VARCHAR(255) NOT NULL," +
-                         "CTS DECIMAL (5,2)," + 
-                         "SVA DECIMAL (5,2)," +
-                         "PRIMARY KEY (Id));";
+                         "CTS DECIMAL (5,2), " +
+                         "SVA DECIMAL (5,2), " +
+                         "Classe VARCHAR(255) NOT NULL," +
+                         "PRIMARY KEY (Nome));";
             stm.executeUpdate(sql);
         } catch (SQLException e) {
             // Erro a criar tabela...
@@ -54,7 +54,7 @@ public class PilotosDAO implements Map<Integer,Piloto> {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs =
-                     stm.executeQuery("SELECT Id FROM Pilotos WHERE Id='"+key+"'")) {
+                     stm.executeQuery("SELECT Nome FROM Pilotos WHERE Nome='"+key+"'")) {
             r = rs.next();
         } catch (SQLException e) {
             // Database error!
@@ -67,11 +67,11 @@ public class PilotosDAO implements Map<Integer,Piloto> {
     @Override
     public boolean containsValue(Object value) {
         Piloto t = (Piloto) value;
-        return this.containsKey(t.getId());
+        return this.containsKey(t.getNome());
     }
 
     @Override
-    public Set<Entry<Integer, Piloto>> entrySet() {
+    public Set<Entry<String, Piloto>> entrySet() {
         throw new NullPointerException("public Set<Map.Entry<String,Piloto>> entrySet() not implemented!");
     }
 
@@ -80,9 +80,9 @@ public class PilotosDAO implements Map<Integer,Piloto> {
         Piloto p = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT * FROM Pilotos WHERE Id='"+key+"'")) {
+             ResultSet rs = stm.executeQuery("SELECT * FROM Pilotos WHERE Nome='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
-                p = new Piloto(rs.getInt("Id"), rs.getString("Name"), rs.getFloat("CTS"), rs.getFloat("SVA"));
+                p = new Piloto(rs.getString("Nome"), rs.getFloat("CTS"), rs.getFloat("SVA"));
             }
         } catch (SQLException e) {
             // Database error!
@@ -98,13 +98,13 @@ public class PilotosDAO implements Map<Integer,Piloto> {
     }
 
     @Override
-    public Set<Integer> keySet() {
-        Set<Integer> res = new HashSet<>();
+    public Set<String> keySet() {
+        Set<String> res = new HashSet<>();
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT Id FROM Pilotos")) {
+             ResultSet rs = stm.executeQuery("SELECT Nome FROM Pilotos")) {
             while (rs.next()) {
-                int idp = rs.getInt("Id");
+                String idp = rs.getString("Nome");
                 res.add(idp);
             }
         } catch (Exception e) {
@@ -116,7 +116,7 @@ public class PilotosDAO implements Map<Integer,Piloto> {
     }
 
     @Override
-    public Piloto put(Integer key, Piloto p) {
+    public Piloto put(String key, Piloto p) {
         Piloto res = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
@@ -138,7 +138,7 @@ public class PilotosDAO implements Map<Integer,Piloto> {
     }
 
     @Override
-    public void putAll(Map<? extends Integer, ? extends Piloto> m) {
+    public void putAll(Map<? extends String, ? extends Piloto> m) {
         m.keySet().forEach(i -> this.put(i, m.get(i)));
     }
 
@@ -147,7 +147,7 @@ public class PilotosDAO implements Map<Integer,Piloto> {
         Piloto p = this.get(key);
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()){
-             ResultSet rs = stm.executeQuery("DELETE FROM Piloto WHERE Id='"+key+"'");
+             ResultSet rs = stm.executeQuery("DELETE FROM Piloto WHERE Nome='"+key+"'");
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

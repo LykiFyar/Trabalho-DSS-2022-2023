@@ -9,11 +9,10 @@ import business.utilizadores.Utilizador;
 
 import java.util.*;
 
-import static business.util.printMapSortedByValue;
-import static business.util.sortMap;
+
+//import static business.util.sortMap;
 
 public class Campeonato {
-    private int id;
     private String nome;
     private List<Circuito> circuitos;
     private List<Jogador> jogadores;
@@ -113,16 +112,16 @@ public class Campeonato {
         if (!this.classificacao.isEmpty()){
             sb.append("Classificação dos carros ICE!\n");
             Map<String, Integer> classificacao = new HashMap<>(this.classificacao);
-            sb.append(printMapSortedByValue(classificacao));
+            sb.append(business.util.printMapSortedByValue(classificacao));
         }
         if (!this.classificacaoH.isEmpty()){
             sb.append("Classificação dos carros Hibrido!\n");
             Map<String, Integer> classificacaoH = new HashMap<>(this.classificacao);
-            sb.append(printMapSortedByValue(classificacaoH));
+            sb.append(business.util.printMapSortedByValue(classificacaoH));
         }
         List<String> resultados = new ArrayList<>();
-        resultados.addAll(sortMap(this.classificacao).keySet());
-        resultados.addAll(sortMap(this.classificacaoH).keySet());
+        resultados.addAll(business.util.sortMap(this.classificacao).keySet());
+        resultados.addAll(business.util.sortMap(this.classificacaoH).keySet());
 
         List<Jogador> ordemJogadores = new ArrayList<>();
         for (String s:resultados){
@@ -206,14 +205,7 @@ public class Campeonato {
     public String getNome(){
         return this.nome;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    
 
     // TODO: Completar esta classe
 }

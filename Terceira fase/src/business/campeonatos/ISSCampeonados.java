@@ -17,7 +17,8 @@ public interface ISSCampeonados {
 
     public boolean validaPiloto(String name);
 
-    public void addPiloto(int id, String name, float cts, float sva);
+    //public void addPiloto(int id, String name, float cts, float sva);
+    public void addPiloto(String name, float cts, float sva);
 
     public boolean validarCircuito(String name);
 
