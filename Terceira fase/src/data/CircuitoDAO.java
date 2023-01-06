@@ -21,6 +21,7 @@ public class CircuitoDAO implements Map<String,Circuito>{
                          "Clima VARCHAR(255) NOT NULL," +
                          "Voltas INT NOT NULL," +
                          "Comprimento INT NOT NULL," +
+                         "Nsetores INT NOT NULL," +
                          "PRIMARY KEY (Nome));";
             stm.executeUpdate(sql);
 
@@ -83,9 +84,12 @@ public class CircuitoDAO implements Map<String,Circuito>{
              Statement stm = conn.createStatement();
              ResultSet rs =
                      stm.executeQuery("SELECT * FROM `Simulação`.`Circuitos` WHERE Nome='"+key+"'")) {
-            r = rs.next() ? new Circuito(rs.getString("Nome"),rs.getInt("Voltas"), 
+            /*r = rs.next() ? new Circuito(rs.getString("Nome"),rs.getInt("Voltas"), 
                              rs.getString("Clima").equals("Chuva"), 
-                             rs.getInt("Comprimento")) : null;
+                             rs.getInt("Comprimento")) : null;*/ // versão antiga
+            r = rs.next() ? new Circuito(rs.getString("Nome"), rs.getInt("Voltas"), 
+                                rs.getInt("Nsetores"), rs.getString("Clima").equals("Chuva"), 
+                                rs.getInt("Comprimento")) : null;
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -121,11 +125,12 @@ public class CircuitoDAO implements Map<String,Circuito>{
     public Circuito put(String key, Circuito value) {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Circuitos (Nome,Clima,Voltas,Comprimento) VALUES ('?','?','?','?')")){
+            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Circuitos (Nome,Clima,Voltas,Comprimento,Nsetores) VALUES ('?','?','?','?','?')")){
                 pstm.setString(1, value.getNome());
                 pstm.setString(2, value.isClima() ? "Chuva" : "Tempo Seco");
                 pstm.setInt(3, value.getNumVoltas());
                 pstm.setInt(3, value.getComprimento());
+                pstm.setInt(5, value.getNSetores());
                 pstm.executeUpdate(); 
             }
         }catch (SQLException e) {

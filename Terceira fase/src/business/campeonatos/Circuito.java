@@ -10,6 +10,7 @@ public class Circuito {
     private int numVoltas;
     private boolean clima; // true-chove | false-seco
     private int comprimento;
+    private int nSetores;
     private List<Setor> setores; // acho que faz sentido ter uma lista porque há uma noção de ordem nos setores.
     private List<Jogador> participantes; // terá a ordem dos jogadores na corrida
     private Map<Jogador,Integer> dnf;
@@ -19,6 +20,22 @@ public class Circuito {
     public Circuito(String nome, int numVoltas, boolean clima, int comprimento){
         this.nome = nome;
         this.numVoltas = numVoltas;
+        this.clima = clima;
+        this.comprimento = comprimento;
+        Setor s1 = new Setor(0,"reta");
+        Setor s2 = new Setor(1,"chicane");
+        Setor s3 = new Setor(2,"curva");
+        List<Setor> setores = new ArrayList<>();
+        setores.add(s1); setores.add(s2); setores.add(s3);
+        this.setores = setores;
+        //this.participantes = null;
+        this.dnf = new HashMap<Jogador,Integer>();
+    }
+
+    public Circuito(String nome, int numVoltas, int nsetores, boolean clima, int comprimento){
+        this.nome = nome;
+        this.numVoltas = numVoltas;
+        this.nSetores = nsetores;
         this.clima = clima;
         this.comprimento = comprimento;
         Setor s1 = new Setor(0,"reta");
@@ -47,6 +64,10 @@ public class Circuito {
 
     public int getComprimento() {
         return comprimento;
+    }
+
+    public int getNSetores(){
+        return nSetores;
     }
 
     public List<Setor> getSetores() {

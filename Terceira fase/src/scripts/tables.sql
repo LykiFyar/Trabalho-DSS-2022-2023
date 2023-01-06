@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `Simulação`.`Circuitos` (
  Clima VARCHAR(255) NOT NULL,
  Voltas INT NOT NULL,
  Comprimento INT NOT NULL,
+ Nsetores INT NOT NULL,
  PRIMARY KEY (Nome));
 
 -- -------------------------------------
