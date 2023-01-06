@@ -81,7 +81,23 @@ public class F1ManagerUI{
         }
     }
 
-
+    private void adicionarCircuitos(){
+        List<String> circuitos = this.campeonatos.getCircuitosNames();
+        while (true){
+            System.out.println("Qual circuito pretente adicionar ao Campeonato?");
+            for (int i=0; i<circuitos.size();i++){
+                System.out.println((i+1) + " -> " + circuitos.get(i));
+            }
+            System.out.println("Escolha 0 se não pretender adicionar mais circuitos!");
+            int nCir = scin.nextInt();
+            scin.nextLine(); //consumir o \n
+            if (nCir == 0){
+                break;
+            }
+            String cir = circuitos.get(nCir-1);
+            this.campeonatos.addCircuito(cir);
+        }
+    }
 
     private void configurarCorrida(int nCorrida){
         System.out.println(this.campeonatos.printCorrida(nCorrida));

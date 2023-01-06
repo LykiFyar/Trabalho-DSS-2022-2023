@@ -7,7 +7,6 @@ public class Setor {
     private String tipoSetor;
 
 
-
     public Setor(int dificuldade, String tipoSetor){
         this.dificuldade = dificuldade;
         this.tipoSetor = tipoSetor;
