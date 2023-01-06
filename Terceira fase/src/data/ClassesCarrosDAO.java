@@ -119,7 +119,7 @@ public class ClassesCarrosDAO implements Map<String,Classe>{
     public Classe put(String key, Classe value) {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO ClassesCarros (Id,minCilindrada,maxCilindrada) VALUES ('?', '?', '?')")){
+            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO ClassesCarros (Id,minCilindrada,maxCilindrada) VALUES (?, ?, ?)")){
                 pstm.setString(1, value.toString());
                 pstm.setInt(2, value.getMinCilindrada());
                 pstm.setInt(3, value.getMaxCilindrada());
@@ -138,7 +138,7 @@ public class ClassesCarrosDAO implements Map<String,Classe>{
         Classe value = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("DELETE FROM ClassesCarross WHERE Id = '?'")){
+            try (PreparedStatement pstm = conn.prepareStatement("DELETE FROM ClassesCarross WHERE Id = ?")){
                 value = this.get(key);
                 pstm.setString(1,(String)key);
                 pstm.executeUpdate(); 

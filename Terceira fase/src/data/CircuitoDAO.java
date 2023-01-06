@@ -125,7 +125,7 @@ public class CircuitoDAO implements Map<String,Circuito>{
     public Circuito put(String key, Circuito value) {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Circuitos (Nome,Clima,Voltas,Comprimento,Nsetores) VALUES ('?','?','?','?','?')")){
+            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Circuitos (Nome,Clima,Voltas,Comprimento,Nsetores) VALUES (?,?,?,?,?)")){
                 pstm.setString(1, value.getNome());
                 pstm.setString(2, value.isClima() ? "Chuva" : "Tempo Seco");
                 pstm.setInt(3, value.getNumVoltas());
@@ -151,7 +151,7 @@ public class CircuitoDAO implements Map<String,Circuito>{
         Circuito value = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("DELETE FROM Circuitos WHERE Nome = '?'")){
+            try (PreparedStatement pstm = conn.prepareStatement("DELETE FROM Circuitos WHERE Nome = ?")){
                 value = this.get(key);
                 pstm.setInt(1,(Integer)key);
                 pstm.executeUpdate(); 

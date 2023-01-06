@@ -110,7 +110,7 @@ public class CarrosDAO implements Map<Integer,Carro> {
     public Carro put(Integer key, Carro value) {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Carros (Marca,Modelo,Classe) VALUES ('?', '?')")){
+            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Carros (Marca,Modelo,Classe) VALUES (?, ?)")){
                 pstm.setString(0,value.getMarca());
                 pstm.setString(1,value.getMarca());
                 pstm.setString(3, value.getClasse().toString());
@@ -161,7 +161,7 @@ public class CarrosDAO implements Map<Integer,Carro> {
         Carro value = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("DELETE FROM Carros WHERE Id = '?'")){
+            try (PreparedStatement pstm = conn.prepareStatement("DELETE FROM Carros WHERE Id = ?")){
                 value = this.get(key);
                 pstm.setInt(1,(Integer)key);
                 pstm.executeUpdate(); 

@@ -106,7 +106,7 @@ public class CampeonatoDAO implements Map<String,Campeonato>{
     public Campeonato put(String key, Campeonato value) {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Campeonatos (Nome) VALUES ('?')")){
+            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Campeonatos (Nome) VALUES (?)")){
                 pstm.setString(1, value.getNome());
                 pstm.executeUpdate(); 
             }

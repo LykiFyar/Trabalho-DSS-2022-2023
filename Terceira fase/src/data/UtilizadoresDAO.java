@@ -126,7 +126,7 @@ public class UtilizadoresDAO implements Map<String,Utilizador> {
                 }
             }
             else {
-                try (PreparedStatement pstm2 = conn.prepareStatement("INSERT INTO Utilizadores (user,pass,pontuaçãoGeral,isAdmin) VALUES ('?','?','?','?')")){
+                try (PreparedStatement pstm2 = conn.prepareStatement("INSERT INTO Utilizadores (user,pass,pontuaçãoGeral,isAdmin) VALUES (?,?,?,?)")){
                     pstm2.setString(1, value.getUsername());
                     pstm2.setString(2, value.getPassword());
                     pstm2.setInt(3, value.getPontuacaoGeral());
@@ -152,7 +152,7 @@ public class UtilizadoresDAO implements Map<String,Utilizador> {
         Utilizador value = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("DELETE FROM Utilizadores WHERE user = '?'")){
+            try (PreparedStatement pstm = conn.prepareStatement("DELETE FROM Utilizadores WHERE user = ?")){
                 value = this.get(key);
                 pstm.setString(1,(String)key);
                 pstm.executeUpdate(); 

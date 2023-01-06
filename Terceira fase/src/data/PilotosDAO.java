@@ -121,7 +121,7 @@ public class PilotosDAO implements Map<String,Piloto> {
              Statement stm = conn.createStatement()) {
 
             // Actualizar a piloto
-            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Pilotos (Nome,CTS,SVA) VALUES ('?', '?', '?')")){
+            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Pilotos (Nome,CTS,SVA) VALUES (?, ?, ?)")){
                 pstm.setString(1,p.getNome());
                 pstm.setFloat(2,p.getCts());
                 pstm.setFloat(3,p.getSva());
