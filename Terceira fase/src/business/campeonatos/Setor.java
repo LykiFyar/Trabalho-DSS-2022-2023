@@ -6,6 +6,29 @@ public class Setor {
     private int dificuldade; //0-facil | 1-dificil | 2-impossivel
     private String tipoSetor;
 
+    public Setor(){
+        int dificuldade = 0;
+        String tipoSetor = "reta";
+
+        Random rand=new Random();
+        int x=rand.nextInt(3);
+        switch (x){
+            case 0:
+                tipoSetor = "reta";
+                dificuldade = rand.nextInt(3);
+                break;
+            case 1:
+                tipoSetor = "curva";
+                dificuldade = rand.nextInt(3);
+                break;
+            case 2:
+                tipoSetor = "chicane";
+                dificuldade = 1; // dificil
+                break;
+        }
+        this.dificuldade = dificuldade;
+        this.tipoSetor = tipoSetor;
+    }
 
     public Setor(int dificuldade, String tipoSetor){
         this.dificuldade = dificuldade;
