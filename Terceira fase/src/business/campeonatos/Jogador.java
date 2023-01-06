@@ -78,7 +78,7 @@ public class Jogador {
         }
         else pacE = pacE*pac;
 
-        long fator_sorte = Double.valueOf(Math.random()*(5)).intValue();
+        long fator_sorte = Double.valueOf(Math.random()*(10)).intValue();
         //System.out.println(fator_sorte);
         float tempo_estimado = 50;  // tempo inicial para cada setor que irá ser influenciado pelos valores acima
 
@@ -107,7 +107,7 @@ public class Jogador {
 
             tempo_estimado = tempo_estimado - ((potencia+potenciaH)/100f) - funcionamentoMotor - pneuE - pacE - (1/cts*10) - (1*sva) - fator_sorte;
         }
-        //System.out.println(tempo_estimado);
+        System.out.println(tempo_estimado);
         return tempo_estimado;
     }
 

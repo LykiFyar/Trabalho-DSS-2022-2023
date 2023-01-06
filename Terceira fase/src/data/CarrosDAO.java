@@ -97,7 +97,7 @@ public class CarrosDAO implements Map<Integer,Carro> {
             // TODO: ATENÇÃO: VER O QUE FAZER COM OS VALORES: PNEU, PAC, MOTORICE E CLASSE
             if(rs.next()){
                 Classe c = classes.get(rs.getString("Classe"));
-                r = new Carro(rs.getInt("Id"), rs.getString("Marca"), rs.getString("Modelo"), 0, 0, null, c);
+                r = new Carro(rs.getInt("Id"), rs.getString("Marca"), rs.getString("Modelo"), 0, 0.5f, null, c);
             }
         } catch (SQLException e) {
             // Database error!

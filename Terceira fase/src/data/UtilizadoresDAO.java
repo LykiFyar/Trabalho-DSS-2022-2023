@@ -118,12 +118,21 @@ public class UtilizadoresDAO implements Map<String,Utilizador> {
     public Utilizador put(String key, Utilizador value) {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Utilizadores (user,pass,pontuaçãoGeral,isAdmin) VALUES ('?','?','?','?')")){
-                pstm.setString(1, value.getUsername());
-                pstm.setString(2, value.getPassword());
-                pstm.setInt(3, value.getPontuacaoGeral());
-                pstm.setInt(4, value.isAdmin() ? 1 : 0);
-                pstm.executeUpdate(); 
+            if (this.containsKey(key)){
+                try (PreparedStatement pstm1 = conn.prepareStatement("UPDATE Utilizadores SET pontuaçãoGeral = ? where user = ?")){
+                    pstm1.setInt(1,value.getPontuacaoGeral());
+                    pstm1.setString(2,key);
+                    pstm1.executeUpdate();
+                }
+            }
+            else {
+                try (PreparedStatement pstm2 = conn.prepareStatement("INSERT INTO Utilizadores (user,pass,pontuaçãoGeral,isAdmin) VALUES ('?','?','?','?')")){
+                    pstm2.setString(1, value.getUsername());
+                    pstm2.setString(2, value.getPassword());
+                    pstm2.setInt(3, value.getPontuacaoGeral());
+                    pstm2.setInt(4, value.isAdmin() ? 1 : 0);
+                    pstm2.executeUpdate();
+                }
             }
         }catch (SQLException e) {
             // Database error!
