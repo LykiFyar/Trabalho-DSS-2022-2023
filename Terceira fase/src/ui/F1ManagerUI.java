@@ -49,6 +49,7 @@ public class F1ManagerUI{
         try{
             System.out.println("\n****** JOGAR CAMPEONATO ****** \n");
             System.out.println("Qual campeonato pretente jogar?");
+            System.out.println("0 -> Campeonato Teste");
             List<String> campeonatos = this.campeonatos.getCampeonatosNames();
             for (int i=0; i<campeonatos.size();i++){
                 System.out.println((i+1) + " -> " + campeonatos.get(i));
