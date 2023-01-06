@@ -88,8 +88,8 @@ public class CircuitoDAO implements Map<String,Circuito>{
                              rs.getString("Clima").equals("Chuva"), 
                              rs.getInt("Comprimento")) : null;*/ // versão antiga
             r = rs.next() ? new Circuito(rs.getString("Nome"), rs.getInt("Voltas"), 
-                                rs.getInt("Nsetores"), rs.getString("Clima").equals("Chuva"), 
-                                rs.getInt("Comprimento")) : null;
+                                rs.getString("Clima").equals("Chuva"),
+                                rs.getInt("Comprimento"), rs.getInt("Nsetores")) : null;
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();

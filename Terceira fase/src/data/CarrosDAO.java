@@ -15,6 +15,7 @@ public class CarrosDAO implements Map<Integer,Carro> {
     private CarrosDAO() {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
+            CarrosDAO.classes = ClassesCarrosDAO.getInstance();
             String sql = "CREATE TABLE IF NOT EXISTS `Simulação`.`Carros` (" +
                          "Id INT NOT NULL AUTO_INCREMENT," +
                          "Marca VARCHAR(255) NOT NULL," +
@@ -23,7 +24,6 @@ public class CarrosDAO implements Map<Integer,Carro> {
                          "FOREIGN KEY (Classe) REFERENCES ClassesCarros(Id)," +
                          "PRIMARY KEY (Id));";
             stm.executeUpdate(sql);
-            CarrosDAO.classes = ClassesCarrosDAO.getInstance();
 
         } catch (SQLException e) { // erro ao criarmos a tabela
             e.printStackTrace();

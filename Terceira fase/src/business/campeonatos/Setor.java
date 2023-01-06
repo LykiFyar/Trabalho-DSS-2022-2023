@@ -1,15 +1,12 @@
 package business.campeonatos;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Setor {
     private int dificuldade; //0-facil | 1-dificil | 2-impossivel
     private String tipoSetor;
 
-    private Setor(){}
+
 
     public Setor(int dificuldade, String tipoSetor){
         this.dificuldade = dificuldade;

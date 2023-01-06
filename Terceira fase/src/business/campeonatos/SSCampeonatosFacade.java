@@ -12,13 +12,19 @@ public class SSCampeonatosFacade implements ISSCampeonados{
 
     private Map<String,Piloto> pilotos;
     private Map<String,Circuito> circuitos;
-    private Map<String,Campeonato> campeonatos;    
+    private Map<String,Campeonato> campeonatos;
+
+    private Campeonato campeonato;
+    private Circuito circuito;
 
     public SSCampeonatosFacade(){
 
         this.pilotos = PilotosDAO.getInstance();
         this.campeonatos = CampeonatoDAO.getInstance();
         this.circuitos = CircuitoDAO.getInstance();
+
+        this.campeonato = new Campeonato();
+        this.circuito = new Circuito("Circuito Teste", 3, false, 10,3);
 
         /*
         this.pilotos = new HashMap<>();
@@ -67,9 +73,9 @@ public class SSCampeonatosFacade implements ISSCampeonados{
     }
 
     @Override
-    public void adicionaCircuito(String name, int numVoltas, List<Setor> setores, int comprimento) {
+    public void adicionaCircuito(String name, int numVoltas, List<Setor> setores, int comprimento, int nSetores) {
         boolean clima = new Random().nextInt(2) == 0;
-        Circuito c = new Circuito(name,numVoltas,clima,comprimento);
+        Circuito c = new Circuito(name,numVoltas,clima,comprimento, nSetores);
         this.circuitos.put(name, c);
     }
 
@@ -85,58 +91,59 @@ public class SSCampeonatosFacade implements ISSCampeonados{
     }
 
 
-    public boolean addJogador(String campeonato, String nome, Utilizador utilizador, Piloto piloto, Carro carro) {
-        return this.campeonatos.get(campeonato).addJogador(nome,utilizador,piloto,carro);
+    public boolean addJogador(String nome, Utilizador utilizador, Piloto piloto, Carro carro) {
+        return this.campeonato.addJogador(nome,utilizador,piloto,carro);
     }
 
-    public void reset(String campeonato){
-        this.campeonatos.get(campeonato).reset();
-    }
+    public void reset(){this.campeonato.reset();}
 
     public List<String> getCampeonatosNames(){
         return new ArrayList<>(this.campeonatos.keySet());
     }
 
+    public List<String> getCircuitosNames(){
+        return new ArrayList<>(this.circuitos.keySet());
+    }
+
     @Override
-    public String jogarCampeonato(String name, int corrida){
-        Campeonato campeonato = campeonatos.get(name);
-        return campeonato.SimularCampeonato(corrida);
+    public String jogarCampeonato(int corrida){
+        return this.campeonato.SimularCampeonato(corrida);
     }
 
-    public String printResultados(String campeonato){
-        return this.campeonatos.get(campeonato).printResultados();
+    public String printResultados(){
+        return this.campeonato.printResultados();
     }
 
-    public int numCorridas(String name){
-        return this.campeonatos.get(name).numCorridas();
+    public int numCorridas(){
+        return this.campeonato.numCorridas();
     }
 
-    public String printCorrida(String campeonato, int nCorrida){
-        return this.campeonatos.get(campeonato).printCorrida(nCorrida);
+    public String printCorrida(int nCorrida){
+        return this.campeonato.printCorrida(nCorrida);
     }
 
-    public int numJogadores(String name){
-        return this.campeonatos.get(name).numJogadores();
+    public int numJogadores(){
+        return this.campeonato.numJogadores();
     }
 
-    public String printJogador(String campeonato, int nJogador){
-        return this.campeonatos.get(campeonato).printJogador(nJogador);
+    public String printJogador(int nJogador){
+        return this.campeonato.printJogador(nJogador);
     }
 
-    public String printCarro(String campeonato, int nJogador){
-        return this.campeonatos.get(campeonato).printCarro(nJogador);
+    public String printCarro(int nJogador){
+        return this.campeonato.printCarro(nJogador);
     }
 
-    public boolean alterarPneu(String campeonato, int nJogador, int pneu){
-        return this.campeonatos.get(campeonato).alterarPneu(nJogador, pneu);
+    public boolean alterarPneu(int nJogador, int pneu){
+        return this.campeonato.alterarPneu(nJogador, pneu);
     }
 
-    public boolean alterarPac(String campeonato, int nJogador, float pac){
-        return this.campeonatos.get(campeonato).alterarPac(nJogador, pac);
+    public boolean alterarPac(int nJogador, float pac){
+        return this.campeonato.alterarPac(nJogador, pac);
     }
 
-    public boolean alterarFuncMotor(String campeonato, int nJogador, int m){
-        return this.campeonatos.get(campeonato).alterarFuncMotor(nJogador, m);
+    public boolean alterarFuncMotor(int nJogador, int m){
+        return this.campeonato.alterarFuncMotor(nJogador, m);
     }
 
     public String printPilotos(){
@@ -153,6 +160,15 @@ public class SSCampeonatosFacade implements ISSCampeonados{
 
     public Piloto getPiloto(String piloto){
         return this.pilotos.get(piloto).clone();
+    }
+
+    public void prepararCampeonato(String camp){
+        this.campeonato = this.campeonatos.get(camp);
+    }
+
+    public void addCircuito(String circuito){
+        Circuito c = this.circuitos.get(circuito);
+        this.campeonato.addCircuito(c);
     }
 
 }

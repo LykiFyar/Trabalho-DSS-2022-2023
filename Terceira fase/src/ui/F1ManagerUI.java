@@ -1,6 +1,5 @@
 package ui;
 
-import business.campeonatos.Campeonato;
 import business.campeonatos.ISSCampeonados;
 import business.campeonatos.SSCampeonatosFacade;
 import business.carros.ISSCarros;
@@ -56,17 +55,20 @@ public class F1ManagerUI{
             }
             int nCamp = scin.nextInt();
             scin.nextLine(); //consumir o \n
-            String camp = campeonatos.get(nCamp-1);
-            Campeonato campeonato = this.campeonatos.getCampeonatos().get(camp);
+            if (nCamp != 0){
+                String camp = campeonatos.get(nCamp-1);
+                this.campeonatos.prepararCampeonato(camp);
+                adicionarCircuitos();
+            }
             try{
-                participantes(campeonato);
-                for (int i=0; i<campeonato.numCorridas(); i++){
-                    configurarCorrida(campeonato,i);
-                    System.out.println(campeonato.SimularCampeonato(i));
+                participantes();
+                for (int i=0; i<this.campeonatos.numCorridas(); i++){
+                    configurarCorrida(i);
+                    System.out.println(this.campeonatos.jogarCampeonato(i));
                     System.out.println("Prime enter para simular a próxima corrida!\n");
                     String enter = scin.nextLine();
                 }
-                System.out.println(campeonato.printResultados());
+                System.out.println(this.campeonatos.printResultados());
                 System.out.println("Prime enter para sair!\n");
                 String enter = scin.nextLine();
             }
@@ -79,21 +81,23 @@ public class F1ManagerUI{
         }
     }
 
-    private void configurarCorrida(Campeonato campeonato, int nCorrida){
-        System.out.println(campeonato.printCorrida(nCorrida));
 
-        for (int i=0; i<campeonato.numJogadores(); i++){
-            System.out.println("Jogador: " + campeonato.printJogador(i));
-            System.out.println("Carro: " + campeonato.printCarro(i));
+
+    private void configurarCorrida(int nCorrida){
+        System.out.println(this.campeonatos.printCorrida(nCorrida));
+
+        for (int i=0; i<this.campeonatos.numJogadores(); i++){
+            System.out.println("Jogador: " + this.campeonatos.printJogador(i));
+            System.out.println("Carro: " + this.campeonatos.printCarro(i));
             System.out.println("Dejesa fazer alterações ao carro? S/N");
             String s = scin.nextLine();
             if (s.equals("S") || s.equals("s")){
-                modificarCarro(campeonato, i);
+                modificarCarro(i);
             }
         }
     }
 
-    private void modificarCarro(Campeonato campeonato, int nJogador){
+    private void modificarCarro(int nJogador){
         boolean flag = true;
         while(flag){
             System.out.println("O que deseja alterar no seu carro?\n" +
@@ -105,13 +109,13 @@ public class F1ManagerUI{
             scin.nextLine(); //consumir o \n
             switch (e){
                 case 1:
-                    trocarPneu(campeonato,nJogador);
+                    trocarPneu(nJogador);
                     break;
                 case 2:
-                    trocarPac(campeonato,nJogador);
+                    trocarPac(nJogador);
                     break;
                 case 3:
-                    trocarFuncMotor(campeonato,nJogador);
+                    trocarFuncMotor(nJogador);
                     break;
                 default:
                     flag = false;
@@ -120,57 +124,57 @@ public class F1ManagerUI{
         System.out.println("Modificações efetuadas!");
     }
 
-    private void trocarPneu(Campeonato campeonato, int nJogador){
+    private void trocarPneu(int nJogador){
         System.out.println("Qual pneu deseja utilizar nesta corrida?\n" +
                 "1 -> Macio\n" +
                 "2 -> Duro\n" +
                 "3 -> Chuva");
         int pneu = scin.nextInt();
         scin.nextLine(); //consumir o \n
-        if (campeonato.alterarPneu(nJogador,pneu-1)){
+        if (this.campeonatos.alterarPneu(nJogador,pneu-1)){
             System.out.println("Pneu alterado com sucesso!");
         }
         else System.out.println("Pneu não faz parte dos pneus disponíveis!");
     }
 
-    private void trocarPac(Campeonato campeonato, int nJogador){
+    private void trocarPac(int nJogador){
         System.out.println("Qual perfil aerodinâmico deseja para o seu carro? Valor entre 0-10");
         int pac = scin.nextInt();
         float pacF = pac/10f;
-        if (campeonato.alterarPac(nJogador,pacF)){
+        if (this.campeonatos.alterarPac(nJogador,pacF)){
             System.out.println("Perfil aerodinâmico alterado com sucesso!");
         }
         else System.out.println("Perfil aerodinâmico inválido!");
     }
 
-    private void trocarFuncMotor(Campeonato campeonato, int nJogador){
+    private void trocarFuncMotor(int nJogador){
         System.out.println("Qual modo de motor deseja utilizar nesta corrida?\n" +
                 "1 -> Conservador\n" +
                 "2 -> Normal\n" +
                 "3 -> Agressivo");
         int m = scin.nextInt();
         scin.nextLine(); //consumir o \n
-        if (campeonato.alterarFuncMotor(nJogador,m-1)){
+        if (this.campeonatos.alterarFuncMotor(nJogador,m-1)){
             System.out.println("Modo de motor alterado com sucesso!");
         }
         else System.out.println("Modo de motor inserido inválido!");
     }
 
-    private void participantes(Campeonato campeonato){
-        campeonato.reset();
-        criarJogador(campeonato);
-        criarJogador(campeonato);
+    private void participantes(){
+        this.campeonatos.reset();
+        criarJogador();
+        criarJogador();
         while (true){
             System.out.println("Deseja adicionar mais jogadores? S/N");
             String s = scin.nextLine();
             if (s.equals("S") || s.equals("s")){
-                criarJogador(campeonato);
+                criarJogador();
             }
             else break;
         }
     }
 
-    private void criarJogador(Campeonato campeonato){
+    private void criarJogador(){
         while (true){
             System.out.println("Insira o seu nome:");
             String nome = scin.nextLine();
@@ -194,7 +198,7 @@ public class F1ManagerUI{
             scin.nextLine(); //consumir o \n
             String piloto = pilotos.get(p-1);
 
-            if (campeonato.addJogador(nome,this.utilizadores.getUtilizador(username),this.campeonatos.getPiloto(piloto),this.carros.getCarro(c))){
+            if (this.campeonatos.addJogador(nome,this.utilizadores.getUtilizador(username),this.campeonatos.getPiloto(piloto),this.carros.getCarro(c))){
                 System.out.println("Jogador adicionado com sucesso!");
                 break;
             }

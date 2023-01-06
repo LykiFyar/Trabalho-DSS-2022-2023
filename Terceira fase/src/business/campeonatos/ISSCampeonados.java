@@ -22,7 +22,7 @@ public interface ISSCampeonados {
 
     public boolean validarCircuito(String name);
 
-    public void adicionaCircuito(String name, int numVoltas, List<Setor> setores, int comprimento);
+    public void adicionaCircuito(String name, int numVoltas, List<Setor> setores, int comprimento, int nSetores);
 
     public boolean campeonatoValido(String name);
 
@@ -30,36 +30,42 @@ public interface ISSCampeonados {
 
     //public void addJogador(String username, Piloto piloto, Carro carro); esta função foi mal pensadae é preciso trocar.
 
-    public boolean addJogador(String campeonato, String nome, Utilizador utilizador, Piloto piloto, Carro carro);
+    public boolean addJogador(String nome, Utilizador utilizador, Piloto piloto, Carro carro);
 
-    public void reset(String campeonato);
+    public void reset();
 
     public List<String> getCampeonatosNames();
 
-    public String jogarCampeonato(String name, int corrida);
+    public List<String> getCircuitosNames();
 
-    public String printResultados(String campeonato);
+    public String jogarCampeonato(int corrida);
 
-    public int numCorridas(String name);
+    public String printResultados();
 
-    public String printCorrida(String campeonato, int nCorrida);
+    public int numCorridas();
 
-    public int numJogadores(String name);
+    public String printCorrida(int nCorrida);
 
-    public String printJogador(String campeonato, int nJogador);
+    public int numJogadores();
 
-    public String printCarro(String campeonato, int nJogador);
+    public String printJogador(int nJogador);
 
-    public boolean alterarPneu(String campeonato, int nJogador, int pneu);
+    public String printCarro(int nJogador);
 
-    public boolean alterarPac(String campeonato, int nJogador, float pac);
+    public boolean alterarPneu(int nJogador, int pneu);
 
-    public boolean alterarFuncMotor(String campeonato, int nJogador, int m);
+    public boolean alterarPac(int nJogador, float pac);
+
+    public boolean alterarFuncMotor(int nJogador, int m);
 
     public String printPilotos();
 
     public List<String> getPilotosNames();
 
     public Piloto getPiloto(String piloto);
+
+    public void prepararCampeonato(String camp);
+
+    public void addCircuito(String circuito);
 
 }

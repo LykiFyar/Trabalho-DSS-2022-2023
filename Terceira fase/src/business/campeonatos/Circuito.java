@@ -17,32 +17,22 @@ public class Circuito {
     
     private Circuito(){}
 
-    public Circuito(String nome, int numVoltas, boolean clima, int comprimento){
+    public Circuito(String nome, int numVoltas, boolean clima, int comprimento, int nSetores){
         this.nome = nome;
         this.numVoltas = numVoltas;
         this.clima = clima;
         this.comprimento = comprimento;
+        /*
         Setor s1 = new Setor(0,"reta");
         Setor s2 = new Setor(1,"chicane");
         Setor s3 = new Setor(2,"curva");
+         */
+        this.nSetores = nSetores;
         List<Setor> setores = new ArrayList<>();
-        setores.add(s1); setores.add(s2); setores.add(s3);
-        this.setores = setores;
-        //this.participantes = null;
-        this.dnf = new HashMap<Jogador,Integer>();
-    }
-
-    public Circuito(String nome, int numVoltas, int nsetores, boolean clima, int comprimento){
-        this.nome = nome;
-        this.numVoltas = numVoltas;
-        this.nSetores = nsetores;
-        this.clima = clima;
-        this.comprimento = comprimento;
-        Setor s1 = new Setor(0,"reta");
-        Setor s2 = new Setor(1,"chicane");
-        Setor s3 = new Setor(2,"curva");
-        List<Setor> setores = new ArrayList<>();
-        setores.add(s1); setores.add(s2); setores.add(s3);
+        for (int i=0; i<nSetores; i++){
+            Setor s = new Setor();
+            setores.add(s);
+        }
         this.setores = setores;
         //this.participantes = null;
         this.dnf = new HashMap<Jogador,Integer>();
