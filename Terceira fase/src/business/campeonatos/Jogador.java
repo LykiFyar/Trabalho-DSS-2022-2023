@@ -2,9 +2,7 @@ package business.campeonatos;
 
 import business.carros.Carro;
 
-import java.util.Random;
 
-//import static business.util.toTitleCase;
 
 public class Jogador {
     private String nome;
@@ -46,7 +44,6 @@ public class Jogador {
         sb.append(piloto.toString()).append("\n");
         return sb.toString();
          */
-        //return business.util.toTitleCase(this.nome);
         return business.util.toTitleCase(this.nome);
     }
 

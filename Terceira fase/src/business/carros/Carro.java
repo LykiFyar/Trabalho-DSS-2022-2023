@@ -1,9 +1,7 @@
 package business.carros;
 
-import business.campeonatos.Circuito;
 import business.campeonatos.Piloto;
 import business.carros.classes.*;
-import java.util.Map;
 
 public class Carro {
     private int id;

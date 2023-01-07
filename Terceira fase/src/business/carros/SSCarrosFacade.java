@@ -10,11 +10,6 @@ public class SSCarrosFacade implements ISSCarros{
 
     public SSCarrosFacade(){
         this.carros = CarrosDAO.getInstance();
-        /*
-        this.carros = new ArrayList<>();
-        this.carros.add(new Carro("Mercedes","AMG",0,0.5F,new MotorICE(6000,1000,1),new C1()));
-        this.carros.add(new Carro("Red Bull","RB-18",0,0.5F,new MotorICE(6000,1000,1),new C1()));
-         */
     }
 
     @Override

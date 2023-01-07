@@ -23,20 +23,6 @@ public class SSCampeonatosFacade implements ISSCampeonados{
         this.circuitos = CircuitoDAO.getInstance();
 
         this.campeonato = new Campeonato();
-
-        /*
-        this.pilotos = new HashMap<>();
-        this.pilotos.put("Ham", new Piloto(0,"Ham",0.5f,0.5f));
-        this.pilotos.put("Max", new Piloto(1,"Max",0.5f,0.5f));
-
-        this.circuitos = new HashMap<>();
-        this.circuitos.put("C1",new Circuito("C1",3,true,10));
-        this.circuitos.put("C2",new Circuito("C2",3,true,20));
-        this.circuitos.put("C3",new Circuito("C3",3,true,30));
-
-        this.campeonatos = new HashMap<>();
-        this.campeonatos.put("Campeonato",new Campeonato());
-         */
     }
 
     public Map<String, Piloto> getPilotos() {

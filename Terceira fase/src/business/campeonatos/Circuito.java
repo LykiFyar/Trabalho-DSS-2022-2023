@@ -22,11 +22,6 @@ public class Circuito {
         this.numVoltas = numVoltas;
         this.clima = clima;
         this.comprimento = comprimento;
-        /*
-        Setor s1 = new Setor(0,"reta");
-        Setor s2 = new Setor(1,"chicane");
-        Setor s3 = new Setor(2,"curva");
-         */
         this.nSetores = nSetores;
         List<Setor> setores = new ArrayList<>();
         for (int i=0; i<nSetores; i++){
@@ -34,7 +29,6 @@ public class Circuito {
             setores.add(s);
         }
         this.setores = setores;
-        //this.participantes = null;
         this.dnf = new HashMap<Jogador,Integer>();
     }
 
@@ -63,8 +57,6 @@ public class Circuito {
     public List<Setor> getSetores() {
         return setores;
     }
-
-    //public List<Jogador> getParticipantes() {return participantes;}
 
     public Map<Jogador, Integer> getDnf() {
         return dnf;
@@ -142,8 +134,4 @@ public class Circuito {
         this.dnf = new HashMap<>();
         this.participantes = new ArrayList<>();
     }
-
-
-    // TODO: Completar esta classe
-
 }

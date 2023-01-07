@@ -1,7 +1,5 @@
 package business;
 
-import business.campeonatos.Jogador;
-
 import java.util.*;
 
 public class util {

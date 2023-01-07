@@ -1,6 +1,5 @@
 package business.campeonatos;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ public interface ISSCampeonados {
 
     public boolean validaPiloto(String name);
 
-    //public void addPiloto(int id, String name, float cts, float sva);
     public void addPiloto(String name, float cts, float sva);
 
     public boolean validarCircuito(String name);
@@ -27,8 +25,6 @@ public interface ISSCampeonados {
     public boolean campeonatoValido(String name);
 
     public void adicionaCampeonato(String name, List<Circuito> circuitos);
-
-    //public void addJogador(String username, Piloto piloto, Carro carro); esta função foi mal pensadae é preciso trocar.
 
     public boolean addJogador(String nome, Utilizador utilizador, Piloto piloto, Carro carro);
 

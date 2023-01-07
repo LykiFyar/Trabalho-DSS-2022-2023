@@ -1,16 +1,10 @@
 package business.campeonatos;
 
 import business.carros.Carro;
-import business.carros.MotorICE;
-import business.carros.classes.C1;
-
-import business.carros.SSCarrosFacade;
 import business.utilizadores.Utilizador;
 
 import java.util.*;
 
-
-//import static business.util.sortMap;
 
 public class Campeonato {
     private String nome;
@@ -21,13 +15,6 @@ public class Campeonato {
 
     public Campeonato(){
         this.nome = "Campeonato Teste";
-        /*
-        Jogador j1 = new Jogador(new Piloto("Ham", 0.5F, 0.5F),new Carro("Mercedes","AMG",0,0.5F,new MotorICE(6000,1000,1),new C1()));
-        Jogador j2 = new Jogador(new Piloto("Max", 0.5F, 0.5F),new Carro("Red Bull","RB-18",0,0.5F,new MotorICE(6000,1000,1),new C1()));
-        List<Jogador> jogadores= new ArrayList<>();
-        jogadores.add(j1); jogadores.add(j2);
-        this.jogadores = jogadores;
-         */
         this.jogadores = new ArrayList<>();
         Circuito c1 = new Circuito("Circuito1 Teste",3,false,15, 3);
         Circuito c2 = new Circuito("Circuito2 Teste",3,true,20, 3);
@@ -41,13 +28,6 @@ public class Campeonato {
 
     public Campeonato(String nome){
         this.nome = nome;
-        /*
-        Jogador j1 = new Jogador(new Piloto("Ham", 0.5F, 0.5F),new Carro("Mercedes","AMG",0,0.5F,new MotorICE(6000,1000,1),new C1()));
-        Jogador j2 = new Jogador(new Piloto("Max", 0.5F, 0.5F),new Carro("Red Bull","RB-18",0,0.5F,new MotorICE(6000,1000,1),new C1()));
-        List<Jogador> jogadores= new ArrayList<>();
-        jogadores.add(j1); jogadores.add(j2);
-        this.jogadores = jogadores;
-         */
         this.jogadores = new ArrayList<>();
         this.circuitos = new ArrayList<>();
         this.classificacao = new HashMap<String,Integer>();
@@ -206,5 +186,4 @@ public class Campeonato {
     }
     
 
-    // TODO: Completar esta classe
 }
