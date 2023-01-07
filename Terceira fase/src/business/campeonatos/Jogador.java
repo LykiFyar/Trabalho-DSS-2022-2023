@@ -120,7 +120,7 @@ public class Jogador {
     }
 
     public boolean alterarPac(float pac){
-        if (pac>=0 && pac<=1){
+        if (pac>=0 && pac<=1 && (this.carro.getClasse().toString().equals("C2") || this.carro.getClasse().toString().equals("C2H"))){
             this.carro.setPac(pac);
             return true;
         }

@@ -161,7 +161,7 @@ public class F1ManagerUI{
         if (this.campeonatos.alterarPac(nJogador,pacF)){
             System.out.println("Perfil aerodinâmico alterado com sucesso!");
         }
-        else System.out.println("Perfil aerodinâmico inválido!");
+        else System.out.println("Perfil aerodinâmico inválido ou o carro não pertence à classe C2!");
     }
 
     private void trocarFuncMotor(int nJogador){

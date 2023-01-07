@@ -70,11 +70,9 @@ public class Piloto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Piloto - ").append(this.nome);
-        /*
-        sb.append("CTS:").append(this.cts).append("\n");
-        sb.append("SVA:").append(this.sva).append("\n");
-         */
+        sb.append("Piloto - ").append(this.nome).append(" - ");
+        sb.append("CTS:").append(this.cts).append(" - ");
+        sb.append("SVA:").append(this.sva);
         return sb.toString();
     }
 

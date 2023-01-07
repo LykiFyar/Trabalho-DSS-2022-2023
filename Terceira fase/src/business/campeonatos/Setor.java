@@ -89,7 +89,7 @@ public class Setor {
             int j = i+1;
             float t1 = tempos.get(i);
             float t2 = tempos.get(j);
-            System.out.println(t1 + " - " + t2);
+            //System.out.println(t1 + " - " + t2);
             if(checkOvertake(t1,t2)){
                 sb.append("O jogador ").append(jogadores.get(j));
                 sb.append(" ultrapassou o jogador ").append(jogadores.get(i));
