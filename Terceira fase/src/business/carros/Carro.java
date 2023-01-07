@@ -26,13 +26,13 @@ public class Carro {
         this.classe = classe != null ? classe.clone() : new C1(6000,6000,95);
     }
 
-    public Carro(int id, String marca, String modelo, int pneu, float pac, MotorICE motorICE, Classe classe){
+    public Carro(int id, String marca, String modelo, int pneu, float pac, MotorICE motorICE, Classe classe, int cilindrada, int potencia){
         this.id = id; 
         this.marca = marca;
         this.modelo = modelo;
         this.pneu = pneu;
         this.pac = pac;
-        this.motorICE = motorICE != null ? motorICE.clone() : new MotorICE(6000, 1000, 1);
+        this.motorICE = motorICE != null ? motorICE.clone() : new MotorICE(cilindrada, potencia, 1);
         this.classe = classe != null ? classe.clone() : new C1(6000,6000,95);
     }
 

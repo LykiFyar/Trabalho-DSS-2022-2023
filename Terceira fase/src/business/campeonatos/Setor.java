@@ -61,9 +61,9 @@ public class Setor {
     private boolean checkOvertake(float t1, float t2){
         switch (this.dificuldade){
             case 0: // facil
-                return t2 - t1 > 1; // se o carro for 1 segundo mais rapido ultrapassa
+                return t1 - t2 > 1; // se o carro for 1 segundo mais rapido ultrapassa
             case 1: // dificil
-                return t2 - t1 > 2; // se o carro for 2 segundo mais rapido ultrapassa
+                return t1 - t2 > 2; // se o carro for 2 segundo mais rapido ultrapassa
             case 2: // impossivel
                 return false; // inicialmente retorna false, mas poderá ser possivel tendo em conta o enunciado
             default:
@@ -89,6 +89,7 @@ public class Setor {
             int j = i+1;
             float t1 = tempos.get(i);
             float t2 = tempos.get(j);
+            System.out.println(t1 + " - " + t2);
             if(checkOvertake(t1,t2)){
                 sb.append("O jogador ").append(jogadores.get(j));
                 sb.append(" ultrapassou o jogador ").append(jogadores.get(i));

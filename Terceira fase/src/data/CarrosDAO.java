@@ -21,6 +21,8 @@ public class CarrosDAO implements Map<Integer,Carro> {
                          "Marca VARCHAR(255) NOT NULL," +
                          "Modelo VARCHAR(255) NOT NULL," +
                          "Classe VARCHAR(255) NOT NULL," +
+                         "Cilindrada INT NOT NULL," +
+                         "Potência INT NOT NULL," +
                          "FOREIGN KEY (Classe) REFERENCES ClassesCarros(Id)," +
                          "PRIMARY KEY (Id));";
             stm.executeUpdate(sql);
@@ -97,7 +99,7 @@ public class CarrosDAO implements Map<Integer,Carro> {
             // TODO: ATENÇÃO: VER O QUE FAZER COM OS VALORES: PNEU, PAC, MOTORICE E CLASSE
             if(rs.next()){
                 Classe c = classes.get(rs.getString("Classe"));
-                r = new Carro(rs.getInt("Id"), rs.getString("Marca"), rs.getString("Modelo"), 0, 0.5f, null, c);
+                r = new Carro(rs.getInt("Id"), rs.getString("Marca"), rs.getString("Modelo"), 0, 0.5f, null, c, rs.getInt("Cilindrada"), rs.getInt("Potência"));
             }
         } catch (SQLException e) {
             // Database error!
@@ -110,10 +112,12 @@ public class CarrosDAO implements Map<Integer,Carro> {
     public Carro put(Integer key, Carro value) {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Carros (Marca,Modelo,Classe) VALUES (?, ?)")){
-                pstm.setString(0,value.getMarca());
+            try (PreparedStatement pstm = conn.prepareStatement("INSERT INTO Carros (Marca,Modelo,Classe,Cilindrada,Potência) VALUES (?, ?, ?, ?, ?)")){
                 pstm.setString(1,value.getMarca());
+                pstm.setString(2,value.getMarca());
                 pstm.setString(3, value.getClasse().toString());
+                pstm.setInt(4, value.getMotorICE().getCilindrada());
+                pstm.setInt(5, value.getMotorICE().getPotencia());
                 pstm.executeUpdate(); 
             }
         }catch (SQLException e) {
