@@ -17,5 +17,7 @@
 
 </div>
 
+### Nota: 18 / 20
+
 <h3><i>Keywords</i></h3>
 DSS, Desenvolvimento de Sistemas de Software, desenvolvimento de sistemas de software, universidade do minho, uminho, miei, lei, engenharia informatica
